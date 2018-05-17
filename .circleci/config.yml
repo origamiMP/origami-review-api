@@ -14,7 +14,6 @@ jobs:
             sudo composer self-update
             composer install -n --prefer-dist
             cp .env.circleci .env
-            php artisan key:generate
       - run:
           name: Setup Code Climate test-reporter
           command: |
