@@ -2,20 +2,11 @@
 
 namespace App\Providers;
 
+use Dusterio\LumenPassport\LumenPassport;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
-
     /**
      * Register any application services.
      *
@@ -23,6 +14,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
+
+    public function boot()
+    {
+        LumenPassport::routes($this->app, ['prefix' => 'v1/oauth']);
+    }
+
 }
