@@ -1,5 +1,8 @@
 <?php
 
+use League\Fractal\Manager;
+use League\Fractal\Serializer\JsonApiSerializer;
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 try {
