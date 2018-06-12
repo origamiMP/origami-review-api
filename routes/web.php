@@ -15,4 +15,5 @@
 $router->group(['prefix' => 'v1', 'middleware' => ['auth:api']], function () use ($router) {
 
     $router->get('users/{id}', 'UserController@show');
+    $router->post('users', 'UserController@store');
 });

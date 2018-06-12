@@ -104,6 +104,15 @@ services:
         - frontend
         - backend
 
+    ipfs:
+      build:
+        context: ./ipfs
+      ports:
+        - "5001:5001"
+      networks:
+        - backend
+        - frontend
+
 ### PHP-FPM ##############################################
     php-fpm:
       build:
