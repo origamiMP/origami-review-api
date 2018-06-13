@@ -20,16 +20,15 @@ class UserController extends Controller
      *
      * @param  int $id
      * @return Response
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show($id)
     {
-        $client = new Client();
-
-
-        $response = $client->request('GET', 'ipfs:5001/api/v0/cat?arg=/ipfs/Qma1msvvP63xDoVrwpudyHo9HFxUVv5taBgvUvPnfT7jeD/cat.jpg');
-        dd('ok');
-
-        dd($response);
+//        $client = new Client();
+//        $response = $client->request('GET', 'ipfs:5001/api/v0/cat?arg=/ipfs/Qma1msvvP63xDoVrwpudyHo9HFxUVv5taBgvUvPnfT7jeD/cat.jpg');
+//        dd('ok');
+//
+//        dd($response);
         return $this->item(User::find($id), new UserTransformer());
     }
 
