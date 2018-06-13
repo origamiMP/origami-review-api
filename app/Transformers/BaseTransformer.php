@@ -25,4 +25,10 @@ class BaseTransformer extends TransformerAbstract
 
         return $params;
     }
+
+    public function addMeta(array $params)
+    {
+        return $this->meta($params);
+    }
+
 }

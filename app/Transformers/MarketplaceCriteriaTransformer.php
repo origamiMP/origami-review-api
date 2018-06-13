@@ -19,7 +19,7 @@ class MarketplaceCriteriaTransformer extends BaseTransformer
      */
     public function transform(MarketplaceCriteria $marketplaceCriteria)
     {
-        return parent::meta([
+        return parent::addMeta([
             'id' => $marketplaceCriteria->id,
             'name' => $marketplaceCriteria->name,
             'weight' => $marketplaceCriteria->weight,
