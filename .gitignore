@@ -9,4 +9,4 @@ storage/oauth-public.key
 .phpstorm.meta.php
 _ide_helper.php
 report/*
-database/testing/*
+database/testing/testdb.sqlite
