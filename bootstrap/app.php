@@ -1,8 +1,5 @@
 <?php
 
-use League\Fractal\Manager;
-use League\Fractal\Serializer\JsonApiSerializer;
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
 try {
@@ -94,7 +91,6 @@ $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
 $app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
 $app->register(Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-
 
 
 $app->configure('auth');

@@ -18,4 +18,8 @@ class Reward extends BaseModel
         'amount', 'wallet', 'sent', 'blockchain_block_id', 'blockchain_tx_id', 'review_id'
     ];
 
+    public function review()
+    {
+        return $this->belongsTo(Review::class);
+    }
 }

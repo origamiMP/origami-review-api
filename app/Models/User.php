@@ -16,7 +16,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         'id' => 'integer|min:0|unique:users,id,{id}',
         'email' => 'required|string|unique:users,email,{email}',
         'organization_id' => 'required|integer|min:0',
-        'organization_type' => 'required|string|in:marketplaces,sellers',
+        'organization_type' => 'required|string|in:\App\Models\Marketplace,\App\Models\Seller',
         'remember_token' => 'nullable|string',
     ];
 

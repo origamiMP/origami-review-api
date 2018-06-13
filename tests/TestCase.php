@@ -40,14 +40,15 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
         ]);
     }
 
-    protected function mockMarketplaceCriteriaRating($marketplaceCriteriaId, $nb = null)
+    protected function mockMarketplaceCriteriaRating($marketplaceCriteriaId, $reviewId, $nb = null)
     {
         return factory(\App\Models\MarketplaceCriteriaRating::class, $nb)->create([
-            'marketplace_criteria_id' => $marketplaceCriteriaId
+            'marketplace_criteria_id' => $marketplaceCriteriaId,
+            'review_id' => $reviewId
         ]);
     }
 
-    protected function mockOrders($marketplaceId, $sellerId, $customerId, $nb = null)
+    protected function mockOrder($marketplaceId, $sellerId, $customerId, $nb = null)
     {
         return factory(\App\Models\Order::class, $nb)->create([
             'marketplace_id' => $marketplaceId,
@@ -71,9 +72,10 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
         ]);
     }
 
-    protected function mockReviewComment($authorId, $authorType, $nb = null)
+    protected function mockReviewComment($reviewId, $authorId, $authorType, $nb = null)
     {
         return factory(\App\Models\ReviewComment::class, $nb)->create([
+            'review_id' => $reviewId,
             'author_id' => $authorId,
             'author_type' => $authorType
         ]);
@@ -84,10 +86,11 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
         return factory(\App\Models\ReviewState::class, $nb)->create();
     }
 
-    protected function mockReward($reviewId, $nb = null)
+    protected function mockReward($reviewId, $wallet, $nb = null)
     {
         return factory(\App\Models\Reward::class, $nb)->create([
-            'review_id' => $reviewId
+            'review_id' => $reviewId,
+            'wallet' => $wallet
         ]);
     }
 

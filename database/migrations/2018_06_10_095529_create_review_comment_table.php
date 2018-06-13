@@ -16,7 +16,7 @@ class CreateReviewCommentTable extends Migration
         Schema::create('review_comments', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->text('comments');
+            $table->text('text');
             $table->string('author_ip');
 
             $table->uuid('review_id');

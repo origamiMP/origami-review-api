@@ -8,7 +8,7 @@ class AttributeTypeTest extends TestCase
         $this->assertEquals(['name', 'email'], $m->getFillable());
     }
 
-    public function testAttributeValuesRelation()
+    public function testOrdersRelation()
     {
         $m = $this->mockCustomer();
         $relation = $m->orders();

@@ -57,8 +57,7 @@ $factory->define(\App\Models\Product::class, function(Faker\Generator $faker) {
 
 $factory->define(\App\Models\Review::class, function(Faker\Generator $faker) {
     return [
-        'id' => $faker->uuid,
-        'name' => $faker->name,
+        'text' => $faker->text,
         'wallet' => $faker->text,
         'rating' => $faker->numberBetween(0, 5),
         'ddb_node_id' => $faker->uuid,
@@ -71,7 +70,7 @@ $factory->define(\App\Models\Review::class, function(Faker\Generator $faker) {
 
 $factory->define(\App\Models\ReviewComment::class, function(Faker\Generator $faker) {
     return [
-        'comments' => $faker->text,
+        'text' => $faker->text,
         'author_ip' => $faker->ipv4
     ];
 });
@@ -85,7 +84,6 @@ $factory->define(\App\Models\ReviewState::class, function(Faker\Generator $faker
 $factory->define(\App\Models\Reward::class, function(Faker\Generator $faker) {
     return [
         'amount' => $faker->randomNumber(),
-        'wallet' => $faker->uuid,
         'sent' => $faker->boolean,
         'blockchain_block_id' => $faker->uuid,
         'blockchain_tx_id' => $faker->uuid,

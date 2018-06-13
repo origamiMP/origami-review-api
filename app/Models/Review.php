@@ -2,8 +2,14 @@
 
 namespace App\Models;
 
+use App\Uuids;
+
 class Review extends BaseModel
 {
+    use Uuids;
+
+    public $incrementing = false;
+
     protected $rules = [
         'id' => 'string|unique:reviews,id,{id}',
         'wallet' => 'required|string',
@@ -15,7 +21,7 @@ class Review extends BaseModel
         'blockchain_tx_id' => 'required|string',
         'blockchain_supplier' => 'required|string|in:ethereum',
         'review_state_id' => 'required|integer|exists:review_states,id',
-        'order_id' => 'required|integer|exists:orders,id|unique:review,order_id,{order_id}',
+        'order_id' => 'required|integer|exists:orders,id|unique:reviews,order_id,{order_id}',
     ];
 
     protected $fillable = [

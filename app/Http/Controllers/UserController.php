@@ -29,33 +29,34 @@ class UserController extends Controller
 //        dd('ok');
 //
 //        dd($response);
-        return $this->item(User::find($id), new UserTransformer());
+//        return $this->item(User::find($id), new UserTransformer());
+        return;
     }
 
     public function store(Request $request)
     {
-        $client = new Client();
-        $params = $request->all();
-        $params['review'] = json_decode($params['data']);
-        unset($params['data']);
-        $params['timestamp'] = Carbon::now();
-
-        $response = $client->request('GET', 'ipfs:5001/api/v0/add', [
-            'multipart' => [
-                [
-                    'name' => 'test.json',
-                    'contents' => json_encode($params),
-                    'headers' => [
-                        'Content-Type' => 'text/plain',
-                        'Content-Disposition' => 'form-data; name="FileContents"; filename="test.json"',
-                    ]
-                ]
-            ]
-        ]);
-        $hash = json_decode($response->getBody()->getContents())->Hash;
+//        $client = new Client();
+//        $params = $request->all();
+//        $params['review'] = json_decode($params['data']);
+//        unset($params['data']);
+//        $params['timestamp'] = Carbon::now();
+//
+//        $response = $client->request('GET', 'ipfs:5001/api/v0/add', [
+//            'multipart' => [
+//                [
+//                    'name' => 'test.json',
+//                    'contents' => json_encode($params),
+//                    'headers' => [
+//                        'Content-Type' => 'text/plain',
+//                        'Content-Disposition' => 'form-data; name="FileContents"; filename="test.json"',
+//                    ]
+//                ]
+//            ]
+//        ]);
+//        $hash = json_decode($response->getBody()->getContents())->Hash;
 
 //        dd(json_decode($response->getBody()->getContents()));
 
-        return response()->json(['response' => $hash]);
+//        return response()->json(['response' => $hash]);
     }
 }
