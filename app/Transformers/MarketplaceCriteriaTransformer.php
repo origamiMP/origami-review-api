@@ -10,6 +10,7 @@ class MarketplaceCriteriaTransformer extends BaseTransformer
         'marketplace', 'marketplace_criteria_rating'
     ];
 
+
     /**
      * Turn this item object into a generic array
      *
