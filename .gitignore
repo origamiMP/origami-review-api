@@ -6,3 +6,7 @@ Homestead.yaml
 origami-review-api/.idea/
 storage/oauth-private.key
 storage/oauth-public.key
+.phpstorm.meta.php
+_ide_helper.php
+report/*
+database/testing/testdb.sqlite
