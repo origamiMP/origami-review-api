@@ -6,3 +6,5 @@ checks:
   identical-code:
     config:
       threshold: #overriding will affect all languages
+exclude:
+  - "app/Transformers/"
