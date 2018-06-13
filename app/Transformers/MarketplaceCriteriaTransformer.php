@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Models\MarketplaceCriteria;
+use App\Models\Marketplace;
 
 class MarketplaceCriteriaTransformer extends BaseTransformer
 {
