@@ -56,6 +56,6 @@ class Marketplace extends BaseModel
 
     public function marketplace_criteria()
     {
-        return $this->hasMany(Marketplace::class);
+        return $this->hasMany(MarketplaceCriteria::class);
     }
 }

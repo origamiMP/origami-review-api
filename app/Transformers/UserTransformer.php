@@ -7,7 +7,7 @@ use App\Models\User;
 class UserTransformer extends BaseTransformer
 {
     protected $availableIncludes = [
-        'author'
+        'organization'
     ];
 
     /**
@@ -29,7 +29,7 @@ class UserTransformer extends BaseTransformer
 
     public function includeOrganization(User $user)
     {
-        $class = substr($user->organization_type, strrpos($user->organization_type, '/') + 1);
+        $class = substr($user->organization_type, strrpos($user->organization_type, '\\') + 1);
         $transformer = "\\App\\Transformers\\" . $class . "Transformer";
 
         return $this->item($user->organization, new $transformer());

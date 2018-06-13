@@ -33,7 +33,7 @@ class ReviewCommentTransformer extends BaseTransformer
 
     public function includeAuthor(ReviewComment $reviewComment)
     {
-        $class = substr($reviewComment->author_type, strrpos($reviewComment->author_type, '/') + 1);
+        $class = substr($reviewComment->author_type, strrpos($reviewComment->author_type, '\\') + 1);
         $transformer = "\\App\\Transformers\\".$class."Transformer";
 
         return $this->item($reviewComment->author, new $transformer());
