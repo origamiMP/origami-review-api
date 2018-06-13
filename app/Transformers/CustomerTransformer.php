@@ -6,7 +6,6 @@ use App\Models\Customer;
 
 class CustomerTransformer extends BaseTransformer
 {
-
     protected $availableIncludes = [
         'orders', 'review_comments'
     ];
@@ -21,8 +20,8 @@ class CustomerTransformer extends BaseTransformer
     {
         return parent::meta([
             'id' => $customer->id,
-            'name' => $customer->name,
             'email' => $customer->email,
+            'name' => $customer->name,
             'created_at' => $customer->created_at,
             'updated_at' => $customer->updated_at
         ]);
