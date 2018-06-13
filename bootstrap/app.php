@@ -27,7 +27,6 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades();
-class_alias('Illuminate\Support\Facades\Storage', 'Storage');
 
 $app->withEloquent();
 
@@ -94,9 +93,12 @@ $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
 $app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
+$app->register(Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+
 
 
 $app->configure('auth');
+$app->configure('database');
 $app->configure('filesystems');
 
 /*

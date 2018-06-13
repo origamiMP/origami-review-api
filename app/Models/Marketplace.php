@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Api\Core\Models\BaseModel;
 
 class Marketplace extends BaseModel
 {

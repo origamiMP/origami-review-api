@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Api\Core\Models\BaseModel;
-
 class Review extends BaseModel
 {
     protected $rules = [

@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Api\Core\Models\BaseModel;
-
 class Product extends BaseModel
 {
     protected $rules = [
@@ -11,7 +9,7 @@ class Product extends BaseModel
         'name' => 'required|string',
         'image' => 'required|string|url',
         'quantity' => 'required|integer|min:0',
-        'price' => 'required|integer|min:0',
+        'price' => 'required|numeric|min:0',
         'order_id' => 'required|integer|exists:orders,id',
     ];
 

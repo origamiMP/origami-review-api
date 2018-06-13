@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Api\Core\Models;
+namespace App\Models;
 
 use App\Exceptions\OrigamiException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @property mixed id
+ */
 abstract class BaseModel extends Model
 {
     protected $rules = [];
@@ -75,6 +78,7 @@ abstract class BaseModel extends Model
         if ($validator->fails()) {
             $exception = new OrigamiException();
             foreach ($validator->errors()->getMessages() as $error) {
+                \Log::info(print_r('[ValidateModel] : '.$error[0], true));
                 $exception->addError($error[0]);
             }
             throw $exception;

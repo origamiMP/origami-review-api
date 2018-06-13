@@ -19,7 +19,7 @@ class CreateProductTable extends Migration
             $table->string('name');
             $table->string('image');
             $table->integer('quantity');
-            $table->integer('price');
+            $table->decimal('price', 20, 6);
 
             $table->integer('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders');
