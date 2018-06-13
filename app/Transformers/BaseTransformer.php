@@ -1,7 +1,5 @@
 <?php namespace App\Transformers;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use League\Fractal\TransformerAbstract;
 
 class BaseTransformer extends TransformerAbstract

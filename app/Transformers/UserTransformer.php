@@ -4,6 +4,10 @@ use App\Models\User;
 
 class UserTransformer extends BaseTransformer
 {
+    protected $availableIncludes = [
+        'author'
+    ];
+
     /**
      * Turn this item object into a generic array
      *
@@ -14,11 +18,19 @@ class UserTransformer extends BaseTransformer
     {
         return parent::meta([
             'id' => $user->id,
-            'name' => $user->name,
             'email' => $user->email,
             'remember_token' => $user->getRememberToken(),
             'created_at' => $user->created_at,
             'updated_at' => $user->updated_at
         ]);
     }
+
+    public function includeOrganization(User $user)
+    {
+        $class = substr($user->organization_type, strrpos($user->organization_type, '/') + 1);
+        $transformer = "\\App\\Transformers\\" . $class . "Transformer";
+
+        return $this->item($user->organization, new $transformer());
+    }
+
 }

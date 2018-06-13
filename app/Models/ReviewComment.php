@@ -1,7 +1,32 @@
 <?php
 
 namespace App\Models;
+use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * App\Models\ReviewComment
+ *
+ * @property int $id
+ * @property string $text
+ * @property string $author_ip
+ * @property string $review_id
+ * @property int $author_id
+ * @property string $author_type
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Model|Eloquent $author
+ * @property-read \App\Models\Review $review
+ * @method static Builder|ReviewComment whereAuthorId($value)
+ * @method static Builder|ReviewComment whereAuthorIp($value)
+ * @method static Builder|ReviewComment whereAuthorType($value)
+ * @method static Builder|ReviewComment whereCreatedAt($value)
+ * @method static Builder|ReviewComment whereId($value)
+ * @method static Builder|ReviewComment whereReviewId($value)
+ * @method static Builder|ReviewComment whereText($value)
+ * @method static Builder|ReviewComment whereUpdatedAt($value)
+ * @mixin Eloquent
+ */
 class ReviewComment extends BaseModel
 {
     protected $rules = [

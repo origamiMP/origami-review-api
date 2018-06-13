@@ -1,7 +1,23 @@
 <?php
 
 namespace App\Models;
+use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * App\Models\ReviewState
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Review[] $reviews
+ * @method static Builder|ReviewState whereCreatedAt($value)
+ * @method static Builder|ReviewState whereId($value)
+ * @method static Builder|ReviewState whereName($value)
+ * @method static Builder|ReviewState whereUpdatedAt($value)
+ * @mixin Eloquent
+ */
 class ReviewState extends BaseModel
 {
     protected $rules = [
