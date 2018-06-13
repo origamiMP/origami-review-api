@@ -13,7 +13,7 @@ class CreateSubratingTable extends Migration
      */
     public function up()
     {
-        Schema::create('subratings', function (Blueprint $table) {
+        Schema::create('marketplace_criteria_ratings', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('rating');
@@ -35,6 +35,6 @@ class CreateSubratingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subratings');
+        Schema::dropIfExists('marketplace_criteria_ratings');
     }
 }

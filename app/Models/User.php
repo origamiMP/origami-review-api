@@ -2,32 +2,36 @@
 
 namespace App\Models;
 
+use App\Api\Core\Models\BaseModel;
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class User extends BaseModel implements AuthenticatableContract, AuthorizableContract
 {
     use HasApiTokens, Authenticatable, Authorizable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email',
+    protected $rules = [
+        'id' => 'integer|min:0|unique:users,id,{id}',
+        'email' => 'required|string|unique:users,email,{email}',
+        'password' => 'required|string',
+        'organization_id' => 'required|integer|min:0',
+        'organization_type' => 'required|string|in:marketplaces,sellers',
+        'remember_token' => 'string',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+    protected $fillable = [
+        'name', 'email', 'organization_id', 'organization_type', 'remember_token'
+    ];
+
     protected $hidden = [
         'password',
     ];
+
+    public function organization()
+    {
+        return $this->morphTo();
+    }
 }

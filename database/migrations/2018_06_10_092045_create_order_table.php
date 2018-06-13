@@ -16,7 +16,7 @@ class CreateOrderTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('reference');
-            $table->integer('review_delay');
+            $table->integer('review_delay')->nullable();
             $table->dateTime('date');
 
             $table->integer('marketplace_id')->unsigned();

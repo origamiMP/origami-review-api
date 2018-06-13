@@ -20,6 +20,10 @@ class CreateRewardTable extends Migration
             $table->boolean('sent');
             $table->string('blockchain_block_id');
             $table->string('blockchain_tx_id');
+
+            $table->uuid('review_id');
+            $table->foreign('review_id')->references('id')->on('reviews');
+
             $table->timestamps();
         });
     }

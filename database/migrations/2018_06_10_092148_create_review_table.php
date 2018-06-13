@@ -32,9 +32,6 @@ class CreateReviewTable extends Migration
             $table->integer('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders');
 
-            $table->integer('reward_id')->unsigned();
-            $table->foreign('reward_id')->references('id')->on('rewards');
-
             $table->timestamps();
         });
     }
