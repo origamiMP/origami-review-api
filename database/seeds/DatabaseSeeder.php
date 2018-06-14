@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+         $this->call('MarketplaceTableSeeder');
+         $this->call('SellerTableSeeder');
          $this->call('UsersTableSeeder');
     }
 }
