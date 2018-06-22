@@ -11,7 +11,7 @@ class SellerTransformerTest extends TestCase
 
         $this->assertEquals([
             'id', 'name', 'uuid', 'verified_rating_count', 'verified_rating_total', 'unverified_rating_count',
-            'unverified_rating_total', 'created_at', 'updated_at', 'meta'
+            'unverified_rating_total', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

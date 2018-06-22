@@ -10,6 +10,8 @@ class OrderTransformer extends BaseTransformer
         'marketplace', 'seller', 'customer', 'review', 'products'
     ];
 
+    protected $defaultIncludes = [];
+
     /**
      * Turn this item object into a generic array
      *
@@ -30,7 +32,7 @@ class OrderTransformer extends BaseTransformer
 
     public function includeMarketplace(Order $order)
     {
-        return $this->item($order->marketplace, new MarketplaceTransformer());
+        return $this->item($order->marketplace, new MarketplaceTransformer(), 'marketplaces');
     }
 
     public function includeSeller(Order $order)
@@ -50,7 +52,7 @@ class OrderTransformer extends BaseTransformer
 
     public function includeProducts(Order $order)
     {
-        return $this->item($order->products, new ProductTransformer());
+        return $this->collection($order->products, new ProductTransformer(), 'products');
     }
 
 }

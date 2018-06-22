@@ -84,6 +84,9 @@ class Controller extends BaseController
         $fractal = app('League\Fractal\Manager');
         $fractal->setSerializer(new JsonApiSerializer(env('APP_URL')));
 
+        if (isset($_GET['include']))
+            $fractal->parseIncludes($_GET['include']);
+
         return response()->json(
             $fractal->createData($resource)->toArray(),
             $status,

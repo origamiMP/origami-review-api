@@ -12,7 +12,7 @@ class MarketplaceCriteriaRatingTransformerTest extends TestCase
         $data = (new \App\Transformers\MarketplaceCriteriaRatingTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'rating', 'created_at', 'updated_at', 'meta'
+            'id', 'rating', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

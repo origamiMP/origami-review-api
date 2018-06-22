@@ -11,7 +11,7 @@ class ProductTransformerTest extends TestCase
         $data = (new \App\Transformers\ProductTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'name', 'image', 'quantity', 'price', 'created_at', 'updated_at', 'meta'
+            'id', 'name', 'image', 'quantity', 'price', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

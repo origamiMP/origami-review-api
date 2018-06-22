@@ -10,7 +10,7 @@ class ReviewStateTransformerTest extends TestCase
         $data = (new \App\Transformers\ReviewStateTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'name', 'created_at', 'updated_at', 'meta'
+            'id', 'name', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

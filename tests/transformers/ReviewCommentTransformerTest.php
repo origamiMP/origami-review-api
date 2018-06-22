@@ -13,7 +13,7 @@ class ReviewCommentTransformerTest extends TestCase
         $data = (new \App\Transformers\ReviewCommentTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'text', 'created_at', 'updated_at', 'meta'
+            'id', 'text', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

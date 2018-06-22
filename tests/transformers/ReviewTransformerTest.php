@@ -12,7 +12,7 @@ class ReviewTransformerTest extends TestCase
 
         $this->assertEquals([
             'id', 'wallet', 'text', 'rating', 'ddb_node_id', 'ddb_supplier', 'blockchain_block_id', 'blockchain_tx_id',
-            'blockchain_supplier', 'created_at', 'updated_at', 'meta'
+            'blockchain_supplier', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

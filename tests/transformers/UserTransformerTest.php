@@ -10,7 +10,7 @@ class UserTransformerTest extends TestCase
         $data = (new \App\Transformers\UserTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'email', 'remember_token', 'created_at', 'updated_at', 'meta'
+            'id', 'email', 'remember_token', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

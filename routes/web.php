@@ -12,8 +12,13 @@
 */
 
 
-$router->group(['prefix' => 'v1', 'middleware' => ['auth:api']], function () use ($router) {
+$router->group(['prefix' => 'v1'], function () use ($router) {
 
-    $router->get('users/{id}', 'UserController@show');
+    $router->group(['middleware' => ['auth:api']], function() use($router) {
+        $router->get('users/{id}', 'UserController@show');
+    });
     $router->post('users', 'UserController@store');
+    $router->get('orders/{id}', 'OrderController@show');
+
 });
+

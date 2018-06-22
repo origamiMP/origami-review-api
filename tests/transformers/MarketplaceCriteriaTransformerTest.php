@@ -10,7 +10,7 @@ class MarketplaceCriteriaTransformerTest extends TestCase
         $data = (new \App\Transformers\MarketplaceCriteriaTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'name', 'weight', 'created_at', 'updated_at', 'meta'
+            'id', 'name', 'weight', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

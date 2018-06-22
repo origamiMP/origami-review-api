@@ -12,7 +12,7 @@ class RewardTransformerTest extends TestCase
         $data = (new \App\Transformers\RewardTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'amount', 'wallet', 'sent', 'blockchain_block_id', 'blockchain_tx_id', 'created_at', 'updated_at', 'meta'
+            'id', 'amount', 'wallet', 'sent', 'blockchain_block_id', 'blockchain_tx_id', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

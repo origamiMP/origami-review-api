@@ -7,6 +7,9 @@ use App\Models\Marketplace;
 class MarketplaceTransformer extends BaseTransformer
 {
 
+    public $type = 'marketplace';
+
+    protected $currentScope = 'marketplace';
     protected $availableIncludes = [
         'users', 'review_comments', 'orders', 'marketplace_criteria'
     ];
@@ -46,7 +49,7 @@ class MarketplaceTransformer extends BaseTransformer
 
     public function includeMarketplaceCriteria(Marketplace $marketplace)
     {
-        return $this->collection($marketplace->marketplace_criteria, new MarketplaceCriteriaTransformer());
+        return $this->collection($marketplace->marketplace_criteria, new MarketplaceCriteriaTransformer(), 'marketplace_criteria');
     }
 
 }

@@ -10,7 +10,7 @@ class OrderTransformerTest extends TestCase
         $data = (new \App\Transformers\OrderTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'reference', 'review_delay', 'date', 'created_at', 'updated_at', 'meta'
+            'id', 'reference', 'review_delay', 'date', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

@@ -10,7 +10,7 @@ class AttributeTypeTransformerTest extends TestCase
         $data = (new \App\Transformers\CustomerTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'email', 'name', 'created_at', 'updated_at', 'meta'
+            'id', 'email', 'name', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

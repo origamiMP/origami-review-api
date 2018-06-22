@@ -10,7 +10,7 @@ class MarketplaceTransformerTest extends TestCase
         $data = (new \App\Transformers\MarketplaceTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'name', 'wallet', 'default_review_delay', 'created_at', 'updated_at', 'meta'
+            'id', 'name', 'wallet', 'default_review_delay', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 

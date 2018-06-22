@@ -14,14 +14,14 @@ class BaseTransformer extends TransformerAbstract
      */
     public function meta(array $params)
     {
-        $params['meta'] = [
-            'copyright' => 'Copyright 2018 Origami Review',
-            'authors' => [
-                'Antoine Dewaele',
-                'Vincent Pichon',
-                'Julien Bruitte'
-            ]
-        ];
+//        $params['meta'] = [
+//            'copyright' => 'Copyright 2018 Origami Review',
+//            'authors' => [
+//                'Antoine Dewaele',
+//                'Vincent Pichon',
+//                'Julien Bruitte'
+//            ]
+//        ];
 
         return $params;
     }
