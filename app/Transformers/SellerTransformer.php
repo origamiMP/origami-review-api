@@ -26,6 +26,8 @@ class SellerTransformer extends BaseTransformer
             'verified_rating_total' => $seller->verified_rating_total,
             'unverified_rating_count' => $seller->unverified_rating_count,
             'unverified_rating_total' => $seller->unverified_rating_total,
+            'image_cover' => $seller->image_cover,
+            'image_profile' => $seller->image_profile,
             'created_at' => $seller->created_at,
             'updated_at' => $seller->updated_at
         ]);

@@ -19,6 +19,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     });
     $router->post('users', 'UserController@store');
     $router->get('orders/{id}', 'OrderController@show');
+    $router->get('sellers/{id}', 'SellerController@show');
 
 });
 

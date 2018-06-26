@@ -21,6 +21,8 @@ class CreateSellerTable extends Migration
             $table->integer('verified_rating_count');
             $table->integer('unverified_rating_total');
             $table->integer('unverified_rating_count');
+            $table->string('image_cover')->nullable();
+            $table->string('image_profile')->nullable();
             $table->timestamps();
         });
     }
