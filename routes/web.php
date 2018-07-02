@@ -21,5 +21,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->get('orders/{id}', 'OrderController@show');
     $router->get('sellers/{id}', 'SellerController@show');
 
+    $router->post('reviews', 'ReviewController@store');
+
 });
 

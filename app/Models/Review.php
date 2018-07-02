@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Api\Core\Services\Connector\BlockchainDispatcher;
 use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -50,21 +51,22 @@ class Review extends BaseModel
 
     protected $rules = [
         'id' => 'string|unique:reviews,id,{id}',
-        'wallet' => 'required|string',
         'text' => 'required|string',
         'rating' => 'required|integer|min:0|max:5',
-        'ddb_node_id' => 'required|string',
-        'ddb_supplier' => 'required|string|in:ipfs',
-        'blockchain_block_id' => 'required|string',
-        'blockchain_tx_id' => 'required|string',
-        'blockchain_supplier' => 'required|string|in:ethereum',
+        'certified' => 'required|boolean',
+        'wallet' => 'nullable|string',
         'review_state_id' => 'required|integer|exists:review_states,id',
         'order_id' => 'required|integer|exists:orders,id|unique:reviews,order_id,{order_id}',
+        'ddb_node_id' => 'nullable|string',
+        'ddb_supplier' => 'nullable|string|in:ipfs',
+        'blockchain_block_id' => 'nullable|string',
+        'blockchain_tx_id' => 'nullable|string',
+        'blockchain_supplier' => 'nullable|string|in:ethereum',
     ];
 
     protected $fillable = [
         'wallet', 'text', 'rating', 'ddb_node_id', 'ddb_supplier', 'blockchain_block_id', 'blockchain_tx_id',
-        'blockchain_supplier', 'review_state_id', 'order_id'
+        'blockchain_supplier', 'review_state_id', 'order_id', 'certified'
     ];
 
     public function order()
@@ -90,5 +92,11 @@ class Review extends BaseModel
     public function review_comments()
     {
         return $this->hasMany(ReviewComment::class);
+    }
+
+    public function certify(string $wallet, string $reviewHash, string $reviewSignedHash)
+    {
+        $dispatcher = new BlockchainDispatcher(BlockchainDispatcher::CERTIFY_REVIEW, $wallet, $reviewHash, $reviewSignedHash);
+        dispatch($dispatcher->onQueue('blockchains'));
     }
 }

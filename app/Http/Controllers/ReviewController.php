@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Rule;
 use App\Models\Review;
 use App\Transformers\ReviewTransformer;
 use Illuminate\Http\Request;
@@ -9,7 +10,6 @@ use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
     protected $type = 'reviews';
-
 
     public function index()
     {
@@ -23,36 +23,14 @@ class ReviewController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'wallet' => 'required|string',
-            'text' => 'required|string',
-            'rating' => 'required|integer|min:0|max:5',
-            'order_id' => 'required|integer|exists:orders,id|unique:reviews,order_id',
-        ]);
+        $this->validate($request, Rule::REVIEW_RULES);
 
-        $marketplace = Review::create($request->all());
+        $params = $request->all();
+        $review = Review::create($params);
 
-        return $this->item($marketplace, new ReviewTransformer(), 201);
-    }
+        if ($params['certified'])
+            $review->certify($params['wallet'], $params['review_hash'], $params['review_signed_hash']);
 
-    public function update($id, Request $request)
-    {
-        $this->validate($request, [
-            'wallet' => 'required|string',
-            'text' => 'required|string',
-            'rating' => 'required|integer|min:0|max:5',
-            'order_id' => 'required|integer|exists:orders,id',
-        ]);
-
-        Review::find($id)->update($request->all());
-
-        return response()->setStatusCode(204);
-    }
-
-    public function destroy($id)
-    {
-        Review::find($id)->delete();
-
-        return response()->setStatusCode(204);
+        return $this->item($review, new ReviewTransformer());
     }
 }

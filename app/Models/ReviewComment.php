@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 

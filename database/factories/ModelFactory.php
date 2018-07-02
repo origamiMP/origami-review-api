@@ -65,6 +65,7 @@ $factory->define(\App\Models\Review::class, function(Faker\Generator $faker) {
         'blockchain_block_id' => $faker->uuid,
         'blockchain_tx_id' => $faker->uuid,
         'blockchain_supplier' => 'ethereum',
+        'certified' => true
     ];
 });
 

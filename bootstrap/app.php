@@ -94,6 +94,7 @@ $app->register(Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
 
 
 $app->configure('auth');
+$app->configure('blockchains');
 $app->configure('database');
 $app->configure('filesystems');
 

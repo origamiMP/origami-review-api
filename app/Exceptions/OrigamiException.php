@@ -35,7 +35,7 @@ class OrigamiException extends HttpException
 
     public function getStatusCode()
     {
-        return parent::getStatusCode();
+        return $this->statusCode;
     }
 
     public function setStatusCode($statusCode)

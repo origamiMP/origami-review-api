@@ -17,20 +17,21 @@ class CreateReviewTable extends Migration
             $table->uuid('id');
             $table->primary('id');
 
-            $table->string('wallet');
             $table->text('text');
             $table->integer('rating');
-            $table->string('ddb_node_id');
-            $table->string('ddb_supplier');
-            $table->string('blockchain_block_id');
-            $table->string('blockchain_tx_id');
-            $table->string('blockchain_supplier');
-
             $table->integer('review_state_id')->unsigned();
             $table->foreign('review_state_id')->references('id')->on('review_states');
 
             $table->integer('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders');
+
+            $table->boolean('certified');
+            $table->string('ddb_node_id')->nullable();
+            $table->string('ddb_supplier')->nullable();
+            $table->string('blockchain_block_id')->nullable();
+            $table->string('blockchain_tx_id')->nullable();
+            $table->string('blockchain_supplier')->nullable();
+            $table->string('wallet')->nullable();
 
             $table->timestamps();
         });
