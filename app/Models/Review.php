@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Api\Core\Services\Connector\BlockchainDispatcher;
+use App\Services\Blockchain\BlockchainDispatcher;
 use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -201,7 +201,7 @@ class Review extends BaseModel
      */
     public function certify(string $wallet, string $reviewHash, string $reviewSignedHash)
     {
-        $dispatcher = new BlockchainDispatcher(BlockchainDispatcher::CERTIFY_REVIEW, $wallet, $reviewHash, $reviewSignedHash);
+        $dispatcher = new BlockchainDispatcher(BlockchainDispatcher::CERTIFY_REVIEW, $this, $wallet, $reviewHash, $reviewSignedHash);
         dispatch($dispatcher->onQueue('blockchains'));
     }
 }

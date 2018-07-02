@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Core\Services\Connector;
+namespace App\Services\Blockchain;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -26,7 +26,7 @@ class BlockchainDispatcher implements ShouldQueue
     {
         $method = $this->method;
 
-        $blockchain = $method == self::CERTIFY_REVIEW ?
+        $blockchain = ($method == self::CERTIFY_REVIEW) ?
             config('blockchains.default_review_blockchain') :
             config('blockchains.default_node_blockchain');
 

@@ -22,7 +22,7 @@ class CreateSubratingTable extends Migration
             $table->foreign('marketplace_criteria_id')->references('id')->on('marketplace_criteria');
 
             $table->uuid('review_id');
-            $table->foreign('review_id')->references('id')->on('reviews');
+            $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
 
             $table->timestamps();
         });

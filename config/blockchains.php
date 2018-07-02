@@ -7,10 +7,10 @@ return [
 
 
     'ipfs' => [
-        'gateway' => '',
+        'gateway' => 'App\Services\Blockchain\IpfsBlockchain',
     ],
 
     'ethereum' => [
-        'gateway' => '',
+        'gateway' => 'App\Services\Blockchain\EthereumBlockchain',
     ]
 ];

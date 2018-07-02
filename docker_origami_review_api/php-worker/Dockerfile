@@ -24,6 +24,7 @@ RUN apk --update add wget \
 
 RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml
 RUN pecl channel-update pecl.php.net && pecl install memcached mcrypt-1.0.1 && docker-php-ext-enable memcached
+RUN adduser -D -H -u 1000 -s /bin/bash laradock
 
 # Install PostgreSQL drivers:
 ARG INSTALL_PGSQL=false

@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,11 +49,8 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof OrigamiException)
             return $this->getErrorResponseFromOrigamiException($e);
-        if ($e instanceof \ErrorException) {
-            $origamiException = (new OrigamiException())->addError($e->getMessage(), 500);
-            return $this->render($request, $origamiException);
-        }
-        return parent::render($request, $e);
+        $origamiException = (new OrigamiException())->addError($e->getMessage(), 500);
+        return $this->render($request, $origamiException);
     }
 
     private function getErrorResponseFromOrigamiException(OrigamiException $e)

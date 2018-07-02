@@ -10,6 +10,7 @@ class IpfsBlockchain extends BlockchainContract
 {
     public function certifyReview(Review $review, string $wallet, string $hash, string $signedHash)
     {
+        \Log::info('certifyReview');
         $this->sendReviewRequest($review, [
             'review' => [
                 'rating' => $review->rating,

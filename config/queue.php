@@ -16,7 +16,7 @@ return [
     */
 
     'default' => env('QUEUE_DRIVER', 'redis'),
-    'blockchain' => env('QUEUE_DRIVER', 'redis'),
+    'blockchains' => env('QUEUE_DRIVER', 'redis'),
 
     /*
     |--------------------------------------------------------------------------
