@@ -46,11 +46,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof OrigamiException) {
-            return response()->json([
-                'errors' => $e->getErrors()
-            ], $e->getStatusCode());
+        if ($e instanceof OrigamiException)
+            return $this->getErrorResponseFromOrigamiException($e);
+        if ($e instanceof \ErrorException) {
+            $origamiException = (new OrigamiException())->addError($e->getMessage(), 500);
+            return $this->render($request, $origamiException);
         }
         return parent::render($request, $e);
+    }
+
+    private function getErrorResponseFromOrigamiException(OrigamiException $e)
+    {
+        return response()->json([
+            'errors' => $e->getErrors()
+        ], $e->getStatusCode());
     }
 }

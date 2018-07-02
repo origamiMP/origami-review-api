@@ -71,14 +71,17 @@ abstract class BaseModel extends Model
 
     protected function validate()
     {
-        $rules = array_map(function($str) { return str_replace('{id}', $this->id, $str); }, $this->rules);
+        $rules = array_map(function ($str) {
+            preg_match('/{(.*?)}/', $str, $match);
+            return count($match) > 0 ? str_replace('{' . $match[1] . '}', $this->id, $str) : $str;
+        }, $this->rules);
 
         $validator = Validator::make($this->toArray(), $rules);
 
         if ($validator->fails()) {
             $exception = new OrigamiException();
             foreach ($validator->errors()->getMessages() as $error) {
-                \Log::info(print_r('[ValidateModel] : '.$error[0], true));
+                \Log::info(print_r('[ValidateModel] : ' . $error[0], true));
                 $exception->addError($error[0]);
             }
             throw $exception;

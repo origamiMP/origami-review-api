@@ -10,7 +10,7 @@ class IpfsBlockchain extends BlockchainContract
 {
     public function certifyReview(Review $review, string $wallet, string $hash, string $signedHash)
     {
-        $content = [
+        $this->sendReviewRequest($review, [
             'review' => [
                 'rating' => $review->rating,
                 'comment' => $review->text,
@@ -19,8 +19,13 @@ class IpfsBlockchain extends BlockchainContract
             'wallet' => $wallet,
             'hash' => $hash,
             'signed_hash' => $signedHash
-        ];
+        ]);
 
+        return true;
+    }
+
+    private function sendReviewRequest(Review $review, array $content)
+    {
         try {
 
             $client = new Client();
@@ -45,7 +50,5 @@ class IpfsBlockchain extends BlockchainContract
         } catch(GuzzleException $e) {
             //todo: see what to do if request failed
         }
-
-        return true;
     }
 }

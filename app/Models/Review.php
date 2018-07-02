@@ -69,31 +69,136 @@ class Review extends BaseModel
         'blockchain_supplier', 'review_state_id', 'order_id', 'certified'
     ];
 
+
+    /**
+     * Order relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
 
+    /**
+     * ReviewState relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function review_state()
     {
         return $this->belongsTo(ReviewState::class);
     }
 
+    /**
+     * MarketplaceCriteriaRating relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function marketplace_criteria_ratings()
     {
         return $this->hasMany(MarketplaceCriteriaRating::class);
     }
 
+    /**
+     * Reward relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function reward()
     {
         return $this->hasOne(Reward::class);
     }
 
+    /**
+     * ReviewComment relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function review_comments()
     {
         return $this->hasMany(ReviewComment::class);
     }
 
+
+    /**
+     * Override of create model method
+     *
+     * @param array $attributes
+     * @return $this|\Illuminate\Database\Eloquent\Model
+     */
+    public static function create(array $attributes = [])
+    {
+        $attributes['rating'] = 0;
+        $attributes['review_state_id'] = ReviewState::getCreatedReviewState()->id;
+        $review = parent::create($attributes);
+        $review->saveCriteria($attributes['criteria']);
+        $review->save();
+
+        return $review;
+    }
+
+    /**
+     * Override of save model method
+     *
+     * @param array $options
+     * @return bool
+     */
+    public function save(array $options = [])
+    {
+        $this->rating = $this->calculateAverageRatingFromCriteria();
+        return parent::save($options);
+    }
+
+    /**
+     * Save marketplace criteria rating relation
+     *
+     * @param $criteria
+     */
+    public function saveCriteria($criteria)
+    {
+        foreach ($criteria as $criterion)
+            $this->marketplace_criteria_ratings()->save(new MarketplaceCriteriaRating($criterion));
+    }
+
+
+    /**
+     * Calculate review average rating from criteria with weight
+     *
+     * @return float|int
+     */
+    public function calculateAverageRatingFromCriteria()
+    {
+        $totalWeight = $this->getCriteriaTotalWeight();
+        $rating = 0;
+        foreach ($this->marketplace_criteria_ratings as $marketplaceCriteriaRating)
+            $rating += $marketplaceCriteriaRating->rating * $marketplaceCriteriaRating->marketplace_criteria->weight;
+
+        return round($rating / $totalWeight);
+    }
+
+    /**
+     * Get Criteria total weight
+     *
+     * @return float|int
+     */
+    public function getCriteriaTotalWeight()
+    {
+        $totalWeight = 0;
+
+        foreach ($this->marketplace_criteria_ratings as $marketplaceCriteriaRating)
+            $totalWeight += $marketplaceCriteriaRating->marketplace_criteria->weight;
+
+        return $totalWeight != 0 ? $totalWeight : 1;
+    }
+
+    /**
+     * Certify review on blockchain
+     *
+     * @param string $wallet
+     * @param string $reviewHash
+     * @param string $reviewSignedHash
+     */
     public function certify(string $wallet, string $reviewHash, string $reviewSignedHash)
     {
         $dispatcher = new BlockchainDispatcher(BlockchainDispatcher::CERTIFY_REVIEW, $wallet, $reviewHash, $reviewSignedHash);

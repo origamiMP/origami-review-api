@@ -3,6 +3,7 @@
 namespace App\Models;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * App\Models\ReviewState
@@ -32,5 +33,15 @@ class ReviewState extends BaseModel
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public static function getCreatedReviewState()
+    {
+        $createdReviewState = self::whereName('CREATED')->first();
+
+        if (!$createdReviewState)
+            throw new NotFoundHttpException('Created Review State not found');
+
+        return $createdReviewState;
     }
 }
