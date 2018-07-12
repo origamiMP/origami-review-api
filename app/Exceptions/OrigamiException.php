@@ -9,19 +9,20 @@ class OrigamiException extends HttpException
     private $errors = [];
     private $statusCode;
 
-    public function __construct($detail = null, $code = 0)
+    public function __construct($detail = null, $title = null, $code = 0)
     {
         $this->statusCode = 422;
 
         if ($detail != null)
-            $this->addError($detail, $this->statusCode, $code);
+            $this->addError($detail, $this->statusCode, $title, $code);
 
         parent::__construct($this->statusCode);
     }
 
-    public function addError(string $detail, $status = 422,  $code = 0)
+    public function addError(string $detail, $status = 422, $title = null, $code = 0)
     {
         $this->errors[] = [
+            'title' => $title,
             'status' => $status,
             'detail' => $detail,
             'code' => $code

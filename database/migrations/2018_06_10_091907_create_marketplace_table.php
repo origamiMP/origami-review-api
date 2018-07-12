@@ -14,10 +14,12 @@ class CreateMarketplaceTable extends Migration
     public function up()
     {
         Schema::create('marketplaces', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
+
             $table->string('name');
-            $table->string('wallet');
-            $table->integer('default_review_delay');
+            $table->string('wallet')->nullable();
+            $table->integer('default_review_delay')->default(48);
             $table->timestamps();
         });
     }

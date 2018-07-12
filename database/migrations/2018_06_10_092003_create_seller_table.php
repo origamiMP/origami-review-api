@@ -14,13 +14,14 @@ class CreateSellerTable extends Migration
     public function up()
     {
         Schema::create('sellers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
+
             $table->string('name');
-            $table->uuid('uuid');
-            $table->integer('verified_rating_total');
-            $table->integer('verified_rating_count');
-            $table->integer('unverified_rating_total');
-            $table->integer('unverified_rating_count');
+            $table->integer('verified_rating_total')->default(0);
+            $table->integer('verified_rating_count')->default(0);
+            $table->integer('unverified_rating_total')->default(0);
+            $table->integer('unverified_rating_count')->default(0);
             $table->string('image_cover')->nullable();
             $table->string('image_profile')->nullable();
             $table->timestamps();

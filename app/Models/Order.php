@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -34,8 +35,10 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Order extends BaseModel
 {
+    use Uuids;
+
     protected $rules = [
-        'id' => 'integer|min:0|unique:orders,id,{id}',
+        'id' => 'string|unique:orders,id,{id}',
         'reference' => 'required|string',
         'review_delay' => 'nullable|integer|min:0',
         'date' => 'required|date',

@@ -22,7 +22,7 @@ class CreateReviewTable extends Migration
             $table->integer('review_state_id')->unsigned();
             $table->foreign('review_state_id')->references('id')->on('review_states');
 
-            $table->integer('order_id')->unsigned();
+            $table->uuid('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
 
             $table->boolean('certified');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Uuids;
 use Illuminate\Database\Eloquent\Builder;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 
@@ -24,8 +25,10 @@ use Barryvdh\LaravelIdeHelper\Eloquent;
  */
 class Customer extends BaseModel
 {
+    use Uuids;
+
     protected $rules = [
-        'id' => 'integer|min:0|unique:customers,id,{id}',
+        'id' => 'string|unique:customers,id,{id}',
         'name' => 'required|string',
         'email' => 'required|string|unique:customers,email,{email}',
     ];

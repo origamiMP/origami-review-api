@@ -14,18 +14,19 @@ class CreateOrderTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('reference');
+            $table->uuid('id');
+            $table->primary('id');
+
             $table->integer('review_delay')->nullable();
             $table->dateTime('date');
 
-            $table->integer('marketplace_id')->unsigned();
+            $table->uuid('marketplace_id');
             $table->foreign('marketplace_id')->references('id')->on('marketplaces');
 
-            $table->integer('seller_id')->unsigned();
+            $table->uuid('seller_id');
             $table->foreign('seller_id')->references('id')->on('sellers');
 
-            $table->integer('customer_id')->unsigned();
+            $table->uuid('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
 
             $table->timestamps();

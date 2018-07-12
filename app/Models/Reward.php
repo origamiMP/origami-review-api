@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -30,8 +31,10 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Reward extends BaseModel
 {
+    use Uuids;
+
     protected $rules = [
-        'id' => 'integer|min:0|unique:rewards,id,{id}',
+        'id' => 'string|unique:rewards,id,{id}',
         'amount' => 'required|integer|min:0',
         'wallet' => 'required|string|exists:reviews,wallet',
         'sent' => 'required|bool',

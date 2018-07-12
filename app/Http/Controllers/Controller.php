@@ -32,8 +32,8 @@ class Controller extends BaseController
             $exception = new OrigamiException();
             $exception->setStatusCode(400);
 
-            foreach ($e->validator->errors()->messages() as $error)
-                $exception->addError($error[0], 0, 400);
+            foreach ($e->validator->errors()->messages() as $key => $error)
+                $exception->addError($error[0], 0, $key, 400);
 
             throw $exception;
         }

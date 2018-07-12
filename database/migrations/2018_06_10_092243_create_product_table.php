@@ -21,7 +21,7 @@ class CreateProductTable extends Migration
             $table->integer('quantity');
             $table->decimal('price', 20, 6);
 
-            $table->integer('order_id')->unsigned();
+            $table->uuid('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
 
             $table->timestamps();

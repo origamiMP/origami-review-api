@@ -14,7 +14,9 @@ class CreateRewardTable extends Migration
     public function up()
     {
         Schema::create('rewards', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
+
             $table->integer('amount');
             $table->string('wallet');
             $table->boolean('sent');

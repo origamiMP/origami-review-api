@@ -16,4 +16,12 @@ class Rule
 //        'rating_without_criteria' => 'required_without:criteria|integer|min:0|max:5',
         'order_id' => 'required|integer|exists:orders,id|unique:reviews,order_id',
     ];
+
+    public const USER_NEW_RULES = [
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required',
+        'organization_type' => 'required|string|in:seller,marketplace',
+        'organization_name' => 'required|string',
+        'cgv' => 'required|boolean'
+    ];
 }

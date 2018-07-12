@@ -19,7 +19,7 @@ class CreateMarketplaceCriteriaTable extends Migration
             $table->string('name');
             $table->decimal('weight', 20, 6);
 
-            $table->integer('marketplace_id')->unsigned();
+            $table->uuid('marketplace_id');
             $table->foreign('marketplace_id')->references('id')->on('marketplaces');
 
             $table->timestamps();

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -28,9 +29,11 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Marketplace extends BaseModel
 {
+    use Uuids;
+
     protected $rules = [
-        'id' => 'integer|min:0|unique:marketplaces,id,{id}',
-        'name' => 'required|string|unique:marketplaces,name,{name}',
+        'id' => 'string|unique:marketplaces,id,{id}',
+        'name' => 'required|string',
         'wallet' => 'required|string|unique:marketplaces,wallet,{wallet}',
         'default_review_delay' => 'required|integer|min:0'
     ];

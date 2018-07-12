@@ -22,7 +22,7 @@ class CreateReviewCommentTable extends Migration
             $table->uuid('review_id');
             $table->foreign('review_id')->references('id')->on('reviews');
 
-            $table->integer('author_id');
+            $table->uuid('author_id');
             $table->string('author_type');
 
             $table->timestamps();

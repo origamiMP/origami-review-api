@@ -21,11 +21,11 @@ class SellerTransformer extends BaseTransformer
         return parent::meta([
             'id' => $seller->id,
             'name' => $seller->name,
-            'uuid' => $seller->uuid,
             'verified_rating_count' => $seller->verified_rating_count,
             'verified_rating_total' => $seller->verified_rating_total,
             'unverified_rating_count' => $seller->unverified_rating_count,
             'unverified_rating_total' => $seller->unverified_rating_total,
+            'average_verified_rating' => $seller->verified_rating_count == 0 ? 0 : $seller->verified_rating_total / $seller->verified_rating_count,
             'image_cover' => $seller->image_cover,
             'image_profile' => $seller->image_profile,
             'created_at' => $seller->created_at,
@@ -46,5 +46,10 @@ class SellerTransformer extends BaseTransformer
     public function includeReviewComments(Seller $seller)
     {
         return $this->item($seller->review_comments, new ReviewCommentTransformer());
+    }
+
+    public function includeReviews(Seller $seller)
+    {
+        return $this->collection($seller->reviews, new ReviewTransformer());
     }
 }
