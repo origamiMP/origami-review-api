@@ -19,7 +19,7 @@ class CreateUserTable extends Migration
 
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('organization_id');
+            $table->uuid('organization_id');
             $table->string('organization_type');
 
             $table->rememberToken();

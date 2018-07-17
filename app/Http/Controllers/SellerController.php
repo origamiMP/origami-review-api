@@ -11,9 +11,12 @@ class SellerController extends Controller
     protected $type = 'sellers';
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->collection(Seller::all(), new SellerTransformer());
+        $sellers = Seller::all();
+        if ($request->get('search'))
+            $sellers = Seller::where('name', 'like', '%'.$request->get('search').'%')->get();
+        return $this->collection($sellers, new SellerTransformer());
     }
 
     public function show($id)

@@ -23,6 +23,11 @@ class UserController extends Controller
     {
     }
 
+    public function showCurrentUser()
+    {
+        return $this->item(currentUser(), new UserTransformer());
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, Rule::USER_NEW_RULES);

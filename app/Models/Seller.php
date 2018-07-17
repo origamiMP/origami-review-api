@@ -36,6 +36,8 @@ class Seller extends BaseModel
 {
     use Uuids;
 
+    public $incrementing = false;
+
     protected $rules = [
         'id' => 'string|unique:sellers,id,{id}',
         'name' => 'required|string',

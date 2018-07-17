@@ -37,6 +37,8 @@ class Order extends BaseModel
 {
     use Uuids;
 
+    public $incrementing = false;
+
     protected $rules = [
         'id' => 'string|unique:orders,id,{id}',
         'reference' => 'required|string',

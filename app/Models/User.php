@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\Uuids;
-use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Auth\Authorizable;
+use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Laravel\Passport\HasApiTokens;
@@ -39,16 +40,18 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 {
     use HasApiTokens, Authenticatable, Authorizable, Uuids;
 
+    public $incrementing = false;
+
     protected $rules = [
         'id' => 'string|unique:users,id,{id}',
         'email' => 'required|email|unique:users,email,{email}',
-        'organization_id' => 'required|integer|min:0',
+        'organization_id' => 'required|string',
         'organization_type' => 'required|string|in:App\Models\Marketplace,App\Models\Seller',
         'remember_token' => 'nullable|string',
     ];
 
     protected $fillable = [
-        'name', 'email', 'organization_id', 'organization_type', 'remember_token'
+        'id', 'name', 'email', 'organization_id', 'organization_type', 'remember_token', 'password'
     ];
 
     protected $hidden = [
@@ -64,11 +67,12 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     {
         $organization = self::createOrganization($attributes);
 
+        \Log::info(print_r($organization, true));
         $attributes['organization_id'] = $organization->id;
         $attributes['organization_type'] = get_class($organization);
+        $attributes['password'] = Hash::make($attributes['password']);
 
-        \Log::info(get_class($organization));
-
+        \Log::info(print_r($attributes, true));
         return parent::create($attributes);
     }
 

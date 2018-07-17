@@ -33,6 +33,8 @@ class Reward extends BaseModel
 {
     use Uuids;
 
+    public $incrementing = false;
+
     protected $rules = [
         'id' => 'string|unique:rewards,id,{id}',
         'amount' => 'required|integer|min:0',

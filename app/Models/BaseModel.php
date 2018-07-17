@@ -54,6 +54,13 @@ abstract class BaseModel extends Model
         return $model;
     }
 
+    /**
+     * @param $column
+     * @param null $operator
+     * @param null $value
+     * @param string $boolean
+     * @return $this
+     */
     public static function where($column, $operator = null, $value = null, $boolean = 'and')
     {
         return static::query()->where($column, $operator, $value, $boolean);

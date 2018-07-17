@@ -31,6 +31,8 @@ class Marketplace extends BaseModel
 {
     use Uuids;
 
+    public $incrementing = false;
+
     protected $rules = [
         'id' => 'string|unique:marketplaces,id,{id}',
         'name' => 'required|string',

@@ -19,7 +19,7 @@ class Rule
 
     public const USER_NEW_RULES = [
         'email' => 'required|email|unique:users,email',
-        'password' => 'required',
+        'password' => 'required|string',
         'organization_type' => 'required|string|in:seller,marketplace',
         'organization_name' => 'required|string',
         'cgv' => 'required|boolean'
