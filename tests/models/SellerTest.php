@@ -5,7 +5,7 @@ class SellerTest extends TestCase
     public function testContainsValidFillableProperties()
     {
         $m = $this->mockSeller();
-        $this->assertEquals(['name', 'uuid', 'verified_rating_total', 'verified_rating_count', 'unverified_rating_total',
+        $this->assertEquals(['name', 'verified_rating_total', 'verified_rating_count', 'unverified_rating_total',
             'unverified_rating_count'], $m->getFillable());
     }
 

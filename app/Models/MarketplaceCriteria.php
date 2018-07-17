@@ -30,7 +30,7 @@ class MarketplaceCriteria extends BaseModel
         'id' => 'integer|min:0|unique:marketplace_criteria,id,{id}',
         'name' => 'required|string',
         'weight' => 'required|numeric',
-        'marketplace_id' => 'required|integer|min:0|exists:marketplaces,id'
+        'marketplace_id' => 'required|string|exists:marketplaces,id'
     ];
 
     protected $fillable = [

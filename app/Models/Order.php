@@ -44,9 +44,9 @@ class Order extends BaseModel
         'reference' => 'required|string',
         'review_delay' => 'nullable|integer|min:0',
         'date' => 'required|date',
-        'marketplace_id' => 'required|integer|exists:marketplaces,id',
-        'seller_id' => 'required|integer|exists:sellers,id',
-        'customer_id' => 'required|integer|exists:customers,id',
+        'marketplace_id' => 'required|string|exists:marketplaces,id',
+        'seller_id' => 'required|string|exists:sellers,id',
+        'customer_id' => 'required|string|exists:customers,id',
     ];
 
     protected $fillable = [

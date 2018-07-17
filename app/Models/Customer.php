@@ -27,6 +27,8 @@ class Customer extends BaseModel
 {
     use Uuids;
 
+    public $incrementing = false;
+
     protected $rules = [
         'id' => 'string|unique:customers,id,{id}',
         'name' => 'required|string',

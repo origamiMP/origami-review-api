@@ -17,7 +17,7 @@ class MarketplaceTransformerTest extends TestCase
     public function testIncludeUsers()
     {
         $m = $this->mockMarketplace();
-        $m->users->push($this->mockUser($m->id, '\App\Models\Marketplace', 3));
+        $m->users->push($this->mockUser($m->id, 'App\Models\Marketplace', 3));
         $data = (new \App\Transformers\MarketplaceTransformer())->includeUsers($m);
 
         $this->assertCount(count($m->users), $data->getData());

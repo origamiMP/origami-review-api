@@ -34,7 +34,7 @@ class ReviewComment extends BaseModel
         'id' => 'integer|min:0|unique:review_states,id,{id}',
         'text' => 'required|string',
         'review_id' => 'required|string|exists:reviews,id',
-        'author_id' => 'required|integer|min:0',
+        'author_id' => 'required|string',
         'author_type' => 'required|string|in:\App\Models\Customer,\App\Models\Marketplace,\App\Models\Seller',
         'author_ip' => 'required|ip'
     ];

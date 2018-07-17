@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string $wallet
  * @property string $text
  * @property int $rating
+ * @property bool $certified
  * @property string $ddb_node_id
  * @property string $ddb_supplier
  * @property string $blockchain_block_id
@@ -56,7 +57,7 @@ class Review extends BaseModel
         'certified' => 'required|boolean',
         'wallet' => 'nullable|string',
         'review_state_id' => 'required|integer|exists:review_states,id',
-        'order_id' => 'required|integer|exists:orders,id|unique:reviews,order_id,{order_id}',
+        'order_id' => 'required|string|exists:orders,id|unique:reviews,order_id,{order_id}',
         'ddb_node_id' => 'nullable|string',
         'ddb_supplier' => 'nullable|string|in:ipfs',
         'blockchain_block_id' => 'nullable|string',
@@ -134,6 +135,7 @@ class Review extends BaseModel
         $review = parent::create($attributes);
         $review->saveCriteria($attributes['criteria']);
         $review->save();
+        $review->incrementGlobalSellerRating();
 
         return $review;
     }
@@ -161,6 +163,21 @@ class Review extends BaseModel
             $this->marketplace_criteria_ratings()->save(new MarketplaceCriteriaRating($criterion));
     }
 
+    /**
+     * Increment global seller rating when new review
+     */
+    public function incrementGlobalSellerRating()
+    {
+        if ($this->certified) {
+            $this->order->seller->verified_rating_count++;
+            $this->order->seller->verified_rating_total += $this->rating;
+        } else {
+            $this->order->seller->unverified_rating_count++;
+            $this->order->seller->unverified_rating_total += $this->rating;
+        }
+        $this->order->seller->save();
+    }
+
 
     /**
      * Calculate review average rating from criteria with weight
@@ -171,7 +188,7 @@ class Review extends BaseModel
     {
         $totalWeight = $this->getCriteriaTotalWeight();
         $rating = 0;
-        foreach ($this->marketplace_criteria_ratings as $marketplaceCriteriaRating)
+        foreach ($this->marketplace_criteria_ratings()->get() as $marketplaceCriteriaRating)
             $rating += $marketplaceCriteriaRating->rating * $marketplaceCriteriaRating->marketplace_criteria->weight;
 
         return round($rating / $totalWeight);
@@ -186,7 +203,7 @@ class Review extends BaseModel
     {
         $totalWeight = 0;
 
-        foreach ($this->marketplace_criteria_ratings as $marketplaceCriteriaRating)
+        foreach ($this->marketplace_criteria_ratings()->get() as $marketplaceCriteriaRating)
             $totalWeight += $marketplaceCriteriaRating->marketplace_criteria->weight;
 
         return $totalWeight != 0 ? $totalWeight : 1;

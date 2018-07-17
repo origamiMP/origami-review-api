@@ -12,6 +12,7 @@
 
 $factory->define(\App\Models\Customer::class, function(Faker\Generator $faker) {
     return [
+        'id' => $faker->uuid,
         'name' => $faker->name,
         'email' => $faker->email
     ];
@@ -19,6 +20,7 @@ $factory->define(\App\Models\Customer::class, function(Faker\Generator $faker) {
 
 $factory->define(\App\Models\Marketplace::class, function(Faker\Generator $faker) {
     return [
+        'id' => $faker->uuid,
         'name' => $faker->name,
         'wallet' => $faker->text,
         'default_review_delay' => $faker->numberBetween(0, 48)
@@ -40,6 +42,7 @@ $factory->define(\App\Models\MarketplaceCriteriaRating::class, function(Faker\Ge
 
 $factory->define(\App\Models\Order::class, function(Faker\Generator $faker) {
     return [
+        'id' => $faker->uuid,
         'reference' => $faker->text,
         'review_delay' => $faker->numberBetween(0, 48),
         'date' => $faker->date(),
@@ -57,6 +60,7 @@ $factory->define(\App\Models\Product::class, function(Faker\Generator $faker) {
 
 $factory->define(\App\Models\Review::class, function(Faker\Generator $faker) {
     return [
+        'id' => $faker->uuid,
         'text' => $faker->text,
         'wallet' => $faker->text,
         'rating' => $faker->numberBetween(0, 5),
@@ -84,6 +88,7 @@ $factory->define(\App\Models\ReviewState::class, function(Faker\Generator $faker
 
 $factory->define(\App\Models\Reward::class, function(Faker\Generator $faker) {
     return [
+        'id' => $faker->uuid,
         'amount' => $faker->randomNumber(),
         'sent' => $faker->boolean,
         'blockchain_block_id' => $faker->uuid,
@@ -93,8 +98,8 @@ $factory->define(\App\Models\Reward::class, function(Faker\Generator $faker) {
 
 $factory->define(\App\Models\Seller::class, function(Faker\Generator $faker) {
     return [
+        'id' => $faker->uuid,
         'name' => $faker->name,
-        'uuid' => $faker->uuid,
         'verified_rating_count' => 10,
         'verified_rating_total' => $faker->numberBetween(10, 50),
         'unverified_rating_count' => 10,
@@ -104,6 +109,7 @@ $factory->define(\App\Models\Seller::class, function(Faker\Generator $faker) {
 
 $factory->define(\App\Models\User::class, function(Faker\Generator $faker) {
     return [
+        'id' => $faker->uuid,
         'email' => $faker->email,
         'password' => $faker->password
     ];

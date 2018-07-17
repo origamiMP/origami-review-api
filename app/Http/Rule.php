@@ -14,7 +14,7 @@ class Rule
         'review_hash' => 'required_if:certified,true|string',
         'review_signed_hash' => 'required_if:certified,true|string',
 //        'rating_without_criteria' => 'required_without:criteria|integer|min:0|max:5',
-        'order_id' => 'required|integer|exists:orders,id|unique:reviews,order_id',
+        'order_id' => 'required|string|exists:orders,id|unique:reviews,order_id',
     ];
 
     public const USER_NEW_RULES = [

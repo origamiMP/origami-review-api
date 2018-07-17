@@ -7,7 +7,7 @@ use App\Models\Seller;
 class SellerTransformer extends BaseTransformer
 {
     protected $availableIncludes = [
-        'users', 'orders', 'review_comments'
+        'users', 'orders', 'review_comments', 'reviews'
     ];
 
     /**
@@ -50,6 +50,6 @@ class SellerTransformer extends BaseTransformer
 
     public function includeReviews(Seller $seller)
     {
-        return $this->collection($seller->reviews, new ReviewTransformer());
+        return $this->collection($seller->reviews, new ReviewTransformer(), 'reviews');
     }
 }

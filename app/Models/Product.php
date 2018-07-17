@@ -34,7 +34,7 @@ class Product extends BaseModel
         'image' => 'required|string|url',
         'quantity' => 'required|integer|min:0',
         'price' => 'required|numeric|min:0',
-        'order_id' => 'required|integer|exists:orders,id',
+        'order_id' => 'required|string|exists:orders,id',
     ];
 
     protected $fillable = [

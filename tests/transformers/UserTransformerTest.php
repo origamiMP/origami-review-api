@@ -5,7 +5,7 @@ class UserTransformerTest extends TestCase
 
     public function testOutputContainsValidStructure()
     {
-        $m = $this->mockUser($this->mockSeller(), '\App\Models\Seller');
+        $m = $this->mockUser($this->mockSeller(), 'App\Models\Seller');
 
         $data = (new \App\Transformers\UserTransformer())->transform($m);
 
@@ -16,7 +16,7 @@ class UserTransformerTest extends TestCase
 
     public function testIncludeAuthor()
     {
-        $m = $this->mockUser($this->mockSeller(), '\App\Models\Seller');
+        $m = $this->mockUser($this->mockSeller(), 'App\Models\Seller');
 
         $data = (new \App\Transformers\UserTransformer())->includeOrganization($m);
 

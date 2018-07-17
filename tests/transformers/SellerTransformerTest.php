@@ -10,8 +10,8 @@ class SellerTransformerTest extends TestCase
         $data = (new \App\Transformers\SellerTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'name', 'uuid', 'verified_rating_count', 'verified_rating_total', 'unverified_rating_count',
-            'unverified_rating_total', 'image_cover', 'image_profile', 'created_at', 'updated_at'
+            'id', 'name', 'verified_rating_count', 'verified_rating_total', 'unverified_rating_count',
+            'unverified_rating_total', 'average_verified_rating', 'image_cover', 'image_profile', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 
@@ -19,7 +19,7 @@ class SellerTransformerTest extends TestCase
     {
         $m = $this->mockSeller();
 
-        $m->users->push($this->mockUser($m, '\App\Models\Seller', 3));
+        $m->users->push($this->mockUser($m, 'App\Models\Seller', 3));
 
         $data = (new \App\Transformers\SellerTransformer())->includeUsers($m);
 

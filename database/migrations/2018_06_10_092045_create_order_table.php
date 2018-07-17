@@ -19,6 +19,7 @@ class CreateOrderTable extends Migration
 
             $table->integer('review_delay')->nullable();
             $table->dateTime('date');
+            $table->string('reference');
 
             $table->uuid('marketplace_id');
             $table->foreign('marketplace_id')->references('id')->on('marketplaces');
