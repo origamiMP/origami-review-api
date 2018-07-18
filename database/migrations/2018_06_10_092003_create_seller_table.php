@@ -22,8 +22,15 @@ class CreateSellerTable extends Migration
             $table->integer('verified_rating_count')->default(0);
             $table->integer('unverified_rating_total')->default(0);
             $table->integer('unverified_rating_count')->default(0);
+
             $table->string('image_cover')->nullable();
             $table->string('image_profile')->nullable();
+            $table->text('description')->nullable();
+            $table->string('website_link')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+
             $table->timestamps();
         });
     }

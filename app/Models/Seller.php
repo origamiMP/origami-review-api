@@ -10,7 +10,13 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @property int $id
  * @property string $name
- * @property string $uuid
+ * @property string $image_cover
+ * @property string $image_profile
+ * @property string $description
+ * @property string $website_link
+ * @property string $email
+ * @property string $phone
+ * @property string $address
  * @property int $verified_rating_total
  * @property int $verified_rating_count
  * @property int $unverified_rating_total
