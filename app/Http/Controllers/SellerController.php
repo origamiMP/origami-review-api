@@ -38,12 +38,12 @@ class SellerController extends Controller
     public function update($id, Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|unique:sellers,name',
+            'name' => 'required|string',
         ]);
 
         Seller::find($id)->update($request->all());
 
-        return response()->setStatusCode(204);
+        return response()->json(null, 204);
     }
 
     public function destroy($id)

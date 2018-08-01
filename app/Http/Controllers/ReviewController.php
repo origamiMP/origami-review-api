@@ -13,7 +13,7 @@ class ReviewController extends Controller
 
     public function index()
     {
-        return $this->collection(Review::all(), new ReviewTransformer());
+        return $this->collection(currentUser()->organization->reviews, new ReviewTransformer());
     }
 
     public function show($id)
@@ -25,12 +25,19 @@ class ReviewController extends Controller
     {
         $this->validate($request, Rule::REVIEW_RULES);
 
-        $params = $request->all();
-        $review = Review::create($params);
-
-        if ($params['certified'])
-            $review->certify($params['wallet'], $params['review_hash'], $params['review_signed_hash']);
-
-        return $this->item($review, new ReviewTransformer());
+        return $this->item(Review::create($request->all()), new ReviewTransformer());
     }
+
+    public function accept($id)
+    {
+        Review::find($id)->accept();
+        return $this->noContent();
+    }
+
+    public function refuse($id)
+    {
+        Review::find($id)->refuse();
+        return $this->noContent();
+    }
+
 }

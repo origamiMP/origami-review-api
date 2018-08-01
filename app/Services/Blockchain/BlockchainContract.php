@@ -6,7 +6,7 @@ use App\Models\Review;
 
 abstract class BlockchainContract
 {
-    public function certifyReview(Review $review, string $wallet, string $hash, string $signedHash)
+    public function certifyReview(Review $review)
     {
         return true;
     }

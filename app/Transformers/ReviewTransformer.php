@@ -35,22 +35,22 @@ class ReviewTransformer extends BaseTransformer
 
     public function includeOrder(Review $review)
     {
-        return $this->item($review->order, new OrderTransformer());
+        return $this->item($review->order, new OrderTransformer(), 'orders');
     }
 
     public function includeReviewComments(Review $review)
     {
-        return $this->collection($review->review_comments, new ReviewCommentTransformer());
+        return $this->collection($review->review_comments, new ReviewCommentTransformer(), "review_comments");
     }
 
     public function includeReviewState(Review $review)
     {
-        return $this->item($review->review_state, new ReviewStateTransformer());
+        return $this->item($review->review_state, new ReviewStateTransformer(), 'review_states');
     }
 
     public function includeReward(Review $review)
     {
-        return $this->item($review->reward, new RewardTransformer());
+        return $this->item($review->reward, new RewardTransformer(), 'rewards');
     }
 
     public function includeMarketplaceCriteriaRatings(Review $review)

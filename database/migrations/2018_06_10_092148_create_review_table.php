@@ -25,13 +25,14 @@ class CreateReviewTable extends Migration
             $table->uuid('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
 
-            $table->boolean('certified');
             $table->string('ddb_node_id')->nullable();
             $table->string('ddb_supplier')->nullable();
             $table->string('blockchain_block_id')->nullable();
             $table->string('blockchain_tx_id')->nullable();
             $table->string('blockchain_supplier')->nullable();
             $table->string('wallet')->nullable();
+            $table->string('hash')->nullable();
+            $table->string('signed_hash')->nullable();
 
             $table->timestamps();
         });

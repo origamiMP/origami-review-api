@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\OrigamiException;
 use App\Services\Blockchain\BlockchainDispatcher;
 use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @property string $id
  * @property string $wallet
+ * @property string $hash
+ * @property string $signed_hash
  * @property string $text
  * @property int $rating
  * @property bool $certified
@@ -54,7 +57,6 @@ class Review extends BaseModel
         'id' => 'string|unique:reviews,id,{id}',
         'text' => 'required|string',
         'rating' => 'required|integer|min:0|max:5',
-        'certified' => 'required|boolean',
         'wallet' => 'nullable|string',
         'review_state_id' => 'required|integer|exists:review_states,id',
         'order_id' => 'required|string|exists:orders,id|unique:reviews,order_id,{order_id}',
@@ -63,11 +65,13 @@ class Review extends BaseModel
         'blockchain_block_id' => 'nullable|string',
         'blockchain_tx_id' => 'nullable|string',
         'blockchain_supplier' => 'nullable|string|in:ethereum',
+        'hash' => 'nullable|string',
+        'signed_hash' => 'nullable|string',
     ];
 
     protected $fillable = [
         'wallet', 'text', 'rating', 'ddb_node_id', 'ddb_supplier', 'blockchain_block_id', 'blockchain_tx_id',
-        'blockchain_supplier', 'review_state_id', 'order_id', 'certified'
+        'blockchain_supplier', 'review_state_id', 'order_id', 'hash', 'signed_hash'
     ];
 
 
@@ -136,6 +140,10 @@ class Review extends BaseModel
         $review->saveCriteria($attributes['criteria']);
         $review->save();
         $review->incrementGlobalSellerRating();
+
+        //todo: send email to seller
+        //todo: send email to marketplace
+        //todo: send email to customer
 
         return $review;
     }
@@ -212,13 +220,42 @@ class Review extends BaseModel
     /**
      * Certify review on blockchain
      *
-     * @param string $wallet
-     * @param string $reviewHash
-     * @param string $reviewSignedHash
      */
-    public function certify(string $wallet, string $reviewHash, string $reviewSignedHash)
+    public function certify()
     {
-        $dispatcher = new BlockchainDispatcher(BlockchainDispatcher::CERTIFY_REVIEW, $this, $wallet, $reviewHash, $reviewSignedHash);
+        $dispatcher = new BlockchainDispatcher(BlockchainDispatcher::CERTIFY_REVIEW, $this);
         dispatch($dispatcher->onQueue('blockchains'));
+    }
+
+    public function refuse()
+    {
+        $this->checkCurrentUserRight();
+        $this->review_state_id = ReviewState::getRefusedReviewState()->id;
+        $this->save();
+
+        //todo: send email to customer
+    }
+
+    public function accept()
+    {
+        $this->checkCurrentUserRight();
+        $this->review_state_id = ReviewState::getAcceptedReviewState()->id;
+        $this->save();
+
+        if ($this->wallet) {
+            $this->certify();
+            //todo: send email to customer
+            //todo: send reward to customer
+        }
+    }
+
+    private function checkCurrentUserRight()
+    {
+        $currentUser = currentUser();
+
+        if ($currentUser && !in_array($currentUser->organization_id, [$this->order->marketplace->id, $this->order->seller->id]))
+            throw new OrigamiException('Access Denied', 'Access Denied', 403);
+
+        return true;
     }
 }

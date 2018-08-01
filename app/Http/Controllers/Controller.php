@@ -93,4 +93,9 @@ class Controller extends BaseController
             $headers
         );
     }
+
+    protected function noContent()
+    {
+        return response()->json(null, 204);
+    }
 }

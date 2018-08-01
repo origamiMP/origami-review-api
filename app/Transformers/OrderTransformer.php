@@ -32,22 +32,34 @@ class OrderTransformer extends BaseTransformer
 
     public function includeMarketplace(Order $order)
     {
+        if (!$order->marketplace)
+            return null;
+
         return $this->item($order->marketplace, new MarketplaceTransformer(), 'marketplaces');
     }
 
     public function includeSeller(Order $order)
     {
-        return $this->item($order->seller, new SellerTransformer());
+        if (!$order->seller)
+            return null;
+
+        return $this->item($order->seller, new SellerTransformer(), 'sellers');
     }
 
     public function includeCustomer(Order $order)
     {
-        return $this->item($order->customer, new CustomerTransformer());
+        if (!$order->customer)
+            return null;
+
+        return $this->item($order->customer, new CustomerTransformer(), 'customers');
     }
 
     public function includeReview(Order $order)
     {
-        return $this->item($order->review, new ReviewTransformer());
+        if (!$order->review)
+            return null;
+
+        return $this->item($order->review, new ReviewTransformer(), 'reviews');
     }
 
     public function includeProducts(Order $order)

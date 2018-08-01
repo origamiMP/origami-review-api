@@ -3,12 +3,13 @@
 namespace App\Services\Blockchain;
 
 use App\Models\Review;
+use App\Models\ReviewState;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class IpfsBlockchain extends BlockchainContract
 {
-    public function certifyReview(Review $review, string $wallet, string $hash, string $signedHash)
+    public function certifyReview(Review $review)
     {
         \Log::info('certifyReview');
         $this->sendReviewRequest($review, [
@@ -17,9 +18,9 @@ class IpfsBlockchain extends BlockchainContract
                 'comment' => $review->text,
                 'timestamp' => $review->created_at
             ],
-            'wallet' => $wallet,
-            'hash' => $hash,
-            'signed_hash' => $signedHash
+            'wallet' => $review->wallet,
+            'hash' => $review->hash,
+            'signed_hash' => $review->signed_hash
         ]);
 
         return true;
@@ -46,6 +47,8 @@ class IpfsBlockchain extends BlockchainContract
             $hash = json_decode($response->getBody()->getContents())->Hash;
             $review->ddb_node_id = $hash;
             $review->ddb_supplier = 'ipfs';
+            $review->review_state_id = ReviewState::getCertifiedReviewState()->id;
+
             $review->save();
 
         } catch(GuzzleException $e) {

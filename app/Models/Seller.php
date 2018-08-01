@@ -55,7 +55,7 @@ class Seller extends BaseModel
 
     protected $fillable = [
         'name', 'verified_rating_total', 'verified_rating_count', 'unverified_rating_total',
-        'unverified_rating_count'
+        'unverified_rating_count', 'email', 'phone', 'website_link', 'description', 'address'
     ];
 
     public function users()
