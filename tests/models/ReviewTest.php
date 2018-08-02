@@ -8,7 +8,7 @@ class ReviewTest extends TestCase
         $order = $this->mockOrder($marketplace, $this->mockSeller(), $this->mockCustomer());
         $m = $this->mockReview($this->mockReviewState(), $order);
         $this->assertEquals(['wallet', 'text', 'rating', 'ddb_node_id', 'ddb_supplier', 'blockchain_block_id',
-            'blockchain_tx_id', 'blockchain_supplier', 'review_state_id', 'order_id', 'certified'], $m->getFillable());
+            'blockchain_tx_id', 'blockchain_supplier', 'review_state_id', 'order_id', 'hash', 'signed_hash'], $m->getFillable());
     }
 
     public function testOrderRelation()

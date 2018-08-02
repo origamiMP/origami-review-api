@@ -6,7 +6,7 @@ class SellerTest extends TestCase
     {
         $m = $this->mockSeller();
         $this->assertEquals(['name', 'verified_rating_total', 'verified_rating_count', 'unverified_rating_total',
-            'unverified_rating_count'], $m->getFillable());
+            'unverified_rating_count', 'email', 'phone', 'website_link', 'description', 'address'], $m->getFillable());
     }
 
     public function testOrdersRelation()
