@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ReviewComment[] $review_comments
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Review[] $reviews
  * @method static Builder|Marketplace whereCreatedAt($value)
  * @method static Builder|Marketplace whereDefaultReviewDelay($value)
  * @method static Builder|Marketplace whereId($value)
@@ -36,8 +37,8 @@ class Marketplace extends BaseModel
     protected $rules = [
         'id' => 'string|unique:marketplaces,id,{id}',
         'name' => 'required|string',
-        'wallet' => 'required|string|unique:marketplaces,wallet,{wallet}',
-        'default_review_delay' => 'required|integer|min:0'
+        'wallet' => 'nullable|string|unique:marketplaces,wallet,{wallet}',
+        'default_review_delay' => 'integer|min:0'
     ];
 
     protected $fillable = [
@@ -62,5 +63,15 @@ class Marketplace extends BaseModel
     public function marketplace_criteria()
     {
         return $this->hasMany(MarketplaceCriteria::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasManyThrough(Review::class, Order::class);
+    }
+
+    public function waiting_reviews()
+    {
+        return $this->reviews->where('review_state_id', ReviewState::getCreatedReviewState()->id);
     }
 }

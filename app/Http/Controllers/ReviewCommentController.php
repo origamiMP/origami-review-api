@@ -4,28 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Rule;
 use App\Models\Review;
+use App\Transformers\ReviewCommentTransformer;
 use App\Transformers\ReviewTransformer;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class ReviewCommentController extends Controller
 {
-    protected $type = 'reviews';
+    protected $type = 'review_comments';
 
-    public function index()
+    public function store($id, Request $request)
     {
-        return $this->collection(currentUser()->organization->reviews, new ReviewTransformer());
-    }
+        $this->validate($request, Rule::REVIEW_COMMENT_RULES);
 
-    public function show($id)
-    {
-        return $this->item(Review::find($id), new ReviewTransformer());
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, Rule::REVIEW_RULES);
-
-        return $this->item(Review::create($request->all()), new ReviewTransformer());
+        $comment = Review::find($id)->addComment($request->get('text'), $request->ip());
+        return $this->item($comment, new ReviewCommentTransformer());
     }
 
     public function accept($id)

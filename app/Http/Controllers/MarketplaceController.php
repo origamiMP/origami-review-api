@@ -37,20 +37,20 @@ class MarketplaceController extends Controller
     public function update($id, Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|unique:marketplaces,name',
-            'wallet' => 'required|string|unique:marketplaces,wallet',
-            'default_review_delay' => 'required|integer|min:0'
+            'name' => 'required|string|unique:marketplaces,name,'.$id,
+            'wallet' => 'nullable|string|unique:marketplaces,wallet',
+            'default_review_delay' => 'integer|min:0'
         ]);
 
         Marketplace::find($id)->update($request->all());
 
-        return response()->setStatusCode(204);
+        return $this->noContent();
     }
 
     public function destroy($id)
     {
         Marketplace::find($id)->delete();
 
-        return response()->setStatusCode(204);
+        return $this->noContent();
     }
 }

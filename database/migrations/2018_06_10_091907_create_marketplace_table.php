@@ -18,6 +18,13 @@ class CreateMarketplaceTable extends Migration
             $table->primary('id');
 
             $table->string('name');
+            $table->string('image_cover');
+            $table->string('image_profile');
+            $table->string('website_link');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->text('description');
             $table->string('wallet')->nullable();
             $table->integer('default_review_delay')->default(48);
             $table->timestamps();

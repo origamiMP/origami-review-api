@@ -28,6 +28,7 @@ class SellerTransformer extends BaseTransformer
 
         return parent::meta([
             'id' => $seller->id,
+            'type' => "seller",
             'name' => $seller->name,
             'verified_rating_count' => $seller->verified_rating_count,
             'verified_rating_total' => $seller->verified_rating_total,

@@ -7,6 +7,7 @@ use App\Services\Blockchain\BlockchainDispatcher;
 use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Request;
 
 /**
  * App\Models\Review
@@ -227,10 +228,11 @@ class Review extends BaseModel
         dispatch($dispatcher->onQueue('blockchains'));
     }
 
-    public function refuse()
+    public function refuse(string $text, string $ip)
     {
         $this->checkCurrentUserRight();
         $this->review_state_id = ReviewState::getRefusedReviewState()->id;
+        $this->addComment($text, $ip);
         $this->save();
 
         //todo: send email to customer
@@ -247,6 +249,16 @@ class Review extends BaseModel
             //todo: send email to customer
             //todo: send reward to customer
         }
+    }
+
+    public function addComment(string $text, string $ip)
+    {
+        return $this->review_comments()->save(new ReviewComment([
+            'text' => $text,
+            'author_ip' => $ip,
+            'author_id' => currentUser() ? currentUser()->organization_id : $this->order->customer->id,
+            'author_type' => currentUser() ? currentUser()->organization_type : 'App\Models\Customer'
+        ]));
     }
 
     private function checkCurrentUserRight()

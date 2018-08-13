@@ -6,10 +6,6 @@ use App\Models\Marketplace;
 
 class MarketplaceTransformer extends BaseTransformer
 {
-
-    public $type = 'marketplace';
-
-    protected $currentScope = 'marketplace';
     protected $availableIncludes = [
         'users', 'review_comments', 'orders', 'marketplace_criteria'
     ];
@@ -24,6 +20,7 @@ class MarketplaceTransformer extends BaseTransformer
     {
         return parent::meta([
             'id' => $marketplace->id,
+            'type' => "marketplace",
             'name' => $marketplace->name,
             'wallet' => $marketplace->wallet,
             'default_review_delay' => $marketplace->default_review_delay,

@@ -17,6 +17,14 @@ class Rule
         'order_id' => 'required|string|exists:orders,id|unique:reviews,order_id',
     ];
 
+    public const REVIEW_REFUSE_RULES = [
+        'text' => 'required|string'
+    ];
+
+    public const REVIEW_COMMENT_RULES = [
+        'text' => 'required|string'
+    ];
+
     public const USER_NEW_RULES = [
         'email' => 'required|email|unique:users,email',
         'password' => 'required|string',

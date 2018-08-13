@@ -26,11 +26,17 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->get('sellers/{id}', 'SellerController@show');
     $router->put('sellers/{id}', 'SellerController@update');
 
+    $router->get('marketplaces', 'MarketplaceController@index');
+    $router->get('marketplaces/{id}', 'MarketplaceController@show');
+    $router->put('marketplaces/{id}', 'MarketplaceController@update');
+
     $router->get('reviews', 'ReviewController@index');
     $router->get('reviews/{id}', 'ReviewController@show');
     $router->post('reviews/{id}/accept', 'ReviewController@accept');
     $router->post('reviews/{id}/refuse', 'ReviewController@refuse');
     $router->post('reviews', 'ReviewController@store');
+
+    $router->post('reviews/{id}/comments', 'ReviewCommentController@store');
 
 });
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -76,5 +77,10 @@ class Seller extends BaseModel
     public function reviews()
     {
         return $this->hasManyThrough(Review::class, Order::class);
+    }
+
+    public function waiting_reviews()
+    {
+        return $this->reviews->where('review_state_id', ReviewState::getCreatedReviewState()->id);
     }
 }
