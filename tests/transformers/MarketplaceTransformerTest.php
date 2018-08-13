@@ -10,7 +10,7 @@ class MarketplaceTransformerTest extends TestCase
         $data = (new \App\Transformers\MarketplaceTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'name', 'wallet', 'default_review_delay', 'created_at', 'updated_at'
+            'id', 'type', 'name', 'wallet', 'default_review_delay', 'created_at', 'updated_at'
         ], array_keys($data));
     }
 
@@ -39,7 +39,7 @@ class MarketplaceTransformerTest extends TestCase
         $order = $this->mockOrder($m, $this->mockSeller(), $customer);
         $review = $this->mockReview($this->mockReviewState(), $order);
 
-        $m->review_comments->push($this->mockReviewComment($review->id, $m->id, '\App\Models\Marketplace', 3));
+        $m->review_comments->push($this->mockReviewComment($review->id, $m->id, 'App\Models\Marketplace', 3));
         $data = (new \App\Transformers\MarketplaceTransformer())->includeReviewComments($m);
 
         $this->assertCount(count($m->review_comments), $data->getData());

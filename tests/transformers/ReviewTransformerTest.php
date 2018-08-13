@@ -53,7 +53,7 @@ class ReviewTransformerTest extends TestCase
         $order = $this->mockOrder($this->mockMarketplace(), $this->mockSeller(), $customer);
         $m = $this->mockReview($this->mockReviewState(), $order);
 
-        $m->review_comments->push($this->mockReviewComment($m, $customer, '\App\Models\Customer', 3));
+        $m->review_comments->push($this->mockReviewComment($m, $customer, 'App\Models\Customer', 3));
 
         $data = (new \App\Transformers\ReviewTransformer())->includeReviewComments($m);
 

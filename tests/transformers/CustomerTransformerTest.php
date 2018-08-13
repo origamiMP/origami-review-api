@@ -30,7 +30,7 @@ class AttributeTypeTransformerTest extends TestCase
         $review = $this->mockReview($this->mockReviewState(), $order);
         $m = $this->mockCustomer();
 
-        $m->review_comments->push($this->mockReviewComment($review->id, $m->id, '\App\Models\Customer', 3));
+        $m->review_comments->push($this->mockReviewComment($review->id, $m->id, 'App\Models\Customer', 3));
         $data = (new \App\Transformers\CustomerTransformer())->includeReviewComments($m);
 
         $this->assertCount(count($m->review_comments), $data->getData());

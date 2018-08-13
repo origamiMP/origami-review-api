@@ -8,7 +8,7 @@ class ReviewCommentTransformerTest extends TestCase
         $customer = $this->mockCustomer();
         $order = $this->mockOrder($this->mockMarketplace(), $this->mockSeller(), $customer);
         $review = $this->mockReview($this->mockReviewState(), $order);
-        $m = $this->mockReviewComment($review, $customer, '\App\Models\Customer');
+        $m = $this->mockReviewComment($review, $customer, 'App\Models\Customer');
 
         $data = (new \App\Transformers\ReviewCommentTransformer())->transform($m);
 
@@ -22,7 +22,7 @@ class ReviewCommentTransformerTest extends TestCase
         $customer = $this->mockCustomer();
         $order = $this->mockOrder($this->mockMarketplace(), $this->mockSeller(), $customer);
         $review = $this->mockReview($this->mockReviewState(), $order);
-        $m = $this->mockReviewComment($review, $customer, '\App\Models\Customer');
+        $m = $this->mockReviewComment($review, $customer, 'App\Models\Customer');
 
         $data = (new \App\Transformers\ReviewCommentTransformer())->includeReview($m);
 
@@ -34,7 +34,7 @@ class ReviewCommentTransformerTest extends TestCase
         $customer = $this->mockCustomer();
         $order = $this->mockOrder($this->mockMarketplace(), $this->mockSeller(), $customer);
         $review = $this->mockReview($this->mockReviewState(), $order);
-        $m = $this->mockReviewComment($review, $customer, '\App\Models\Customer');
+        $m = $this->mockReviewComment($review, $customer, 'App\Models\Customer');
 
         $data = (new \App\Transformers\ReviewCommentTransformer())->includeAuthor($m);
 

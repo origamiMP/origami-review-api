@@ -10,7 +10,7 @@ class SellerTransformerTest extends TestCase
         $data = (new \App\Transformers\SellerTransformer())->transform($m);
 
         $this->assertEquals([
-            'id', 'name', 'verified_rating_count', 'verified_rating_total', 'unverified_rating_count',
+            'id', 'type', 'name', 'verified_rating_count', 'verified_rating_total', 'unverified_rating_count',
             'unverified_rating_total', 'average_verified_rating', 'image_cover', 'image_profile', 'description',
             'website_link', 'email', 'phone', 'address', 'five_rating_reviews_ratio', 'four_rating_reviews_ratio',
             'three_rating_reviews_ratio', 'two_rating_reviews_ratio', 'one_rating_reviews_ratio', 'created_at',
@@ -46,7 +46,7 @@ class SellerTransformerTest extends TestCase
         $order = $this->mockOrder($this->mockMarketplace(), $m, $this->mockCustomer());
         $review = $this->mockReview($this->mockReviewState(), $order);
 
-        $m->review_comments->push($this->mockReviewComment($review, $m, '\App\Models\Seller', 3));
+        $m->review_comments->push($this->mockReviewComment($review, $m, 'App\Models\Seller', 3));
 
         $data = (new \App\Transformers\SellerTransformer())->includeReviewComments($m);
 
