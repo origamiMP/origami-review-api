@@ -3,8 +3,6 @@ jobs:
   build:
     environment:
       CC_TEST_REPORTER_ID: b757a37a011b352e3ab9ef3f989ce9adc97fe8f4616ad4c531e66c6f7bcf4d1e
-    docker:
-      - image: circleci/php:7.1.9-browsers
     working_directory: ~/origami-review-api
     steps:
       - checkout
