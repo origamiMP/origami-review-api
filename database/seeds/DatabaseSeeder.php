@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
          $this->call('MarketplaceTableSeeder');
          $this->call('SellerTableSeeder');
-         $this->call('UsersTableSeeder');
+         $this->call('ReviewStateTableSeeder');
+         $this->call('OrderTableSeeder');
     }
 }

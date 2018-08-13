@@ -7,7 +7,6 @@ use App\Services\Blockchain\BlockchainDispatcher;
 use App\Uuids;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Request;
 
 /**
  * App\Models\Review
@@ -177,7 +176,7 @@ class Review extends BaseModel
      */
     public function incrementGlobalSellerRating()
     {
-        if ($this->certified) {
+        if ($this->wallet) {
             $this->order->seller->verified_rating_count++;
             $this->order->seller->verified_rating_total += $this->rating;
         } else {

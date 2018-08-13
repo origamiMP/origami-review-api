@@ -68,8 +68,7 @@ $factory->define(\App\Models\Review::class, function(Faker\Generator $faker) {
         'ddb_supplier' => "ipfs",
         'blockchain_block_id' => $faker->uuid,
         'blockchain_tx_id' => $faker->uuid,
-        'blockchain_supplier' => 'ethereum',
-        'certified' => true
+        'blockchain_supplier' => 'ethereum'
     ];
 });
 

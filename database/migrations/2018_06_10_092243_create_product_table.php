@@ -22,7 +22,7 @@ class CreateProductTable extends Migration
             $table->decimal('price', 20, 6);
 
             $table->uuid('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
             $table->timestamps();
         });

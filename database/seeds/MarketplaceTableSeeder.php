@@ -11,10 +11,35 @@ class MarketplaceTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Marketplace::firstOrCreate([
-            'name' => 'Marketplace1',
-            'wallet' => '0x123456789',
-            'default_review_delay' => 1
+        $this->createMarketplace('CDiscount');
+        $this->createMarketplace('Amazon');
+        $this->createMarketplace('Mendity');
+        $this->createMarketplace('MinisMoi');
+        $this->createMarketplace('CommentSeRuiner');
+    }
+
+    public function createMarketplace(string $name)
+    {
+        $marketplace = \App\Models\Marketplace::firstOrCreate([
+            'name' => $name
+        ]);
+
+        \App\Models\User::firstOrCreate([
+            'email' => 'admin-'.$name.'@origami-review.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('testdev'),
+            'organization_id' => $marketplace->id,
+            'organization_type' => 'App\Models\Marketplace'
+        ]);
+
+        \App\Models\MarketplaceCriteria::firstOrCreate([
+            'name' => 'Qualité du produit',
+            'weight' => 5,
+            'marketplace_id' => $marketplace->id
+        ]);
+        \App\Models\MarketplaceCriteria::firstOrCreate([
+            'name' => 'Vitesse de livraison',
+            'weight' => 5,
+            'marketplace_id' => $marketplace->id
         ]);
     }
 }

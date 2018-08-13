@@ -20,7 +20,7 @@ class CreateReviewCommentTable extends Migration
             $table->string('author_ip');
 
             $table->uuid('review_id');
-            $table->foreign('review_id')->references('id')->on('reviews');
+            $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
 
             $table->uuid('author_id');
             $table->string('author_type');
