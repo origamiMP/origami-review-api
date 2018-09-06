@@ -14,13 +14,15 @@
 
 $router->group(['prefix' => 'v1'], function () use ($router) {
 
-    $router->group(['middleware' => ['auth:api']], function() use($router) {
+    $router->group(['middleware' => ['auth:api']], function () use ($router) {
         $router->get('users/{id}', 'UserController@show');
         $router->get('/me', 'UserController@showCurrentUser');
     });
 
     $router->post('users', 'UserController@store');
+
     $router->get('orders/{id}', 'OrderController@show');
+    $router->post('orders/simulate', 'OrderController@demoSimulate');
 
     $router->get('sellers', 'SellerController@index');
     $router->get('sellers/{id}', 'SellerController@show');
