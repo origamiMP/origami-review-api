@@ -13,7 +13,7 @@ class ReviewController extends Controller
 
     public function index()
     {
-        return $this->collection(currentUser()->organization->reviews, new ReviewTransformer());
+        return $this->collection(currentUser()->organization->reviews->sortByDesc('created_at'), new ReviewTransformer());
     }
 
     public function show($id)

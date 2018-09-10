@@ -74,6 +74,6 @@ class SellerTransformer extends BaseTransformer
 
     public function includeReviews(Seller $seller)
     {
-        return $this->collection($seller->reviews->whereIn('review_state_id', [2, 4]), new ReviewTransformer(), 'reviews');
+        return $this->collection($seller->reviews->whereIn('review_state_id', [2, 4])->sortByDesc('created_at'), new ReviewTransformer(), 'reviews');
     }
 }

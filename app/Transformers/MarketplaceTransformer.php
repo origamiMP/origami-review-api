@@ -82,7 +82,7 @@ class MarketplaceTransformer extends BaseTransformer
 
     public function includeReviews(Marketplace $marketplace)
     {
-        return $this->collection($marketplace->reviews->whereIn('review_state_id', [2, 4]), new ReviewTransformer(), 'reviews');
+        return $this->collection($marketplace->reviews->whereIn('review_state_id', [2, 4])->sortByDesc('created_at'), new ReviewTransformer(), 'reviews');
     }
 
 
