@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        LumenPassport::allowMultipleTokens();
         LumenPassport::routes($this->app, ['prefix' => 'v1/oauth']);
     }
 
