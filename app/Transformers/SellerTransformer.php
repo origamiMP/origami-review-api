@@ -35,6 +35,7 @@ class SellerTransformer extends BaseTransformer
             'unverified_rating_count' => $seller->unverified_rating_count,
             'unverified_rating_total' => $seller->unverified_rating_total,
             'average_verified_rating' => $seller->verified_rating_count == 0 ? 0 : round($seller->verified_rating_total / $seller->verified_rating_count),
+            'average_rating' => $seller->unverified_rating_count + $seller->verified_rating_count == 0 ? 0 : round(($seller->verified_rating_total + $seller->unverified_rating_total) / ($seller->unverified_rating_count + $seller->verified_rating_count)),
 
             'image_cover' => $seller->image_cover,
             'image_profile' => $seller->image_profile,

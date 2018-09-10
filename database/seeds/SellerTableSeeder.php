@@ -11,25 +11,235 @@ class SellerTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->createSeller('Cuteland', 'https://cute.land/img/cute-land-logo-1447340489.jpg', 'https://pbs.twimg.com/profile_images/659387979081871360/BYKlTWqh.jpg');
-        $this->createSeller('Geekstore', 'https://www.geekstore.fr/c/10000130-category_default/exclusivit%C3%A9-geek-store.jpg', 'https://www.myfrenchstartup.com/logo/geekstore.png');
-        $this->createSeller('Nodshop', 'https://nodshop.com/img/cadeau-original-et-idee-cadeaux-nodshop-logo-14840666411.jpg', 'https://ideecadeaufrance.com/wp-content/themes/idee-cadeau-theme/img/partenaires/icf/nodshop-logo.jpg');
-        $this->createSeller('SuperInsolite', 'http://touteslesbox.fr/wp-content/uploads/2017/10/super-insolite-350x185.jpg', 'https://www.super-insolite.com/wp-content/themes/super-insolite/assets/img/logo/s.png');
-        $this->createSeller('Disney', 'https://upload.wikimedia.org/wikipedia/fr/8/86/Logo_DisneyStore.png', 'https://res.cloudinary.com/goodsearch/image/upload/v1506656074/hi_resolution_merchant_logos/disney-store_coupons.jpg');
-        $this->createSeller('CoinDuGeek', 'https://www.coindugeek.com/modules/nq_social/images/1/fr/social.jpg', 'https://image.noelshack.com/fichiers/2018/33/1/1534169056-download.png');
+        $this->createSeller(
+            'Wallmart',
+            'Walmart Inc. (formerly branded as Wal-Mart Stores, Inc.) is an American multinational retail corporation that operates a chain of hypermarkets, discount department stores, and grocery stores. Headquartered in Bentonville, Arkansas, the company was founded by Sam Walton in 1962 and incorporated on October 31, 1969. It also owns and operates Sam\'s Club retail warehouses. As of January 31, 2018, Walmart has 11,718 stores and clubs in 28 countries, operating under 59 different names.The company operates under the name Walmart in the United States and Canada, as Walmart de México y Centroamérica in Mexico and Central America, as Asda in the United Kingdom, as the Seiyu Group in Japan, and as Best Price in India. It has wholly owned operations in Argentina, Chile, Brazil, and Canada.',
+            'Bentonville, Arkansas, États-Unis',
+            'https://www.walmart.com/',
+            'https://drive.google.com/drive/u/1/folders/1QrKF3h9lJ-mcJwM4EJVsAbaeDltMHDGI',
+            env('API_URL'). 'images/logo-wallmart.jpg'
+        );
+
+        $this->createSeller(
+            'Apple',
+            'Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. The company\'s hardware products include the iPhone smartphone, the iPad tablet computer, the Mac personal computer, the iPod portable media player, the Apple Watch smartwatch, the Apple TV digital media player, and the HomePod smart speaker.',
+            'https://www.apple.com/fr/',
+            'Cupertino, Californie',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Samsung',
+            'Samsung was founded by Lee Byung-chul in 1938 as a trading company. Over the next three decades, the group diversified into areas including food processing, textiles, insurance, securities and retail. Samsung entered the electronics industry in the late 1960s and the construction and shipbuilding industries in the mid-1970s; these areas would drive its subsequent growth. Following Lee\'s death in 1987, Samsung was separated into four business groups – Samsung Group, Shinsegae Group, CJ Group and Hansol Group.',
+            'http://samsung.com/',
+            'Seocho District, Seoul, South Korea',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Intel',
+            'Intel Corporation (stylized as intel) is an American multinational corporation and technology company headquartered in Santa Clara, California, in the Silicon Valley. It is the world\'s second largest and second highest valued semiconductor chip maker based on revenue after being overtaken by Samsung, and is the inventor of the x86 series of microprocessors, the processors found in most personal computers (PCs). Intel supplies processors for computer system manufacturers such as Apple, Lenovo, HP, and Dell.',
+            'http://www.intel.com/',
+            'Santa Clara, California, U.S.',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'IBM',
+            'International Business Machines Corporation (IBM) is an American multinational technology company headquartered in Armonk, New York, United States, with operations in over 170 countries. The company began in 1911 as the Computing-Tabulating-Recording Company (CTR) and was renamed "International Business Machines" in 1924. IBM manufactures and markets computer hardware, middleware and software, and provides hosting and consulting services in areas ranging from mainframe computers to nanotechnology. IBM is also a major research organization, holding the record for most U.S. patents generated by a business (as of 2018) for 25 consecutive years',
+            'https://www.ibm.com/us-en/',
+            'Armonk, New York, U.S.',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Nike',
+            'Nike, Inc. is an American multinational corporation that is engaged in the design, development, manufacturing, and worldwide marketing and sales of footwear, apparel, equipment, accessories, and services. The company is headquartered near Beaverton, Oregon, in the Portland metropolitan area. It is the world\'s largest supplier of athletic shoes and apparel and a major manufacturer of sports equipment,',
+            'http://www.nike.com/',
+            'Washington County, Oregon, U.S.',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Honda',
+            'Honda Motor Company, Ltd. is a Japanese public multinational conglomerate corporation primarily known as a manufacturer of automobiles, aircraft, motorcycles, and power equipment. Honda has been the world\'s largest motorcycle manufacturer since 1959, as well as the world\'s largest manufacturer of internal combustion engines measured by volume, producing more than 14 million internal combustion engines each year.',
+            'http://world.honda.com/',
+            'Minato, Tokyo, Japan',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Pepsi',
+            'Pepsi is a carbonated soft drink manufactured by PepsiCo. Originally created and developed in 1893 by Caleb Bradham and introduced as Brad\'s Drink, it was renamed as Pepsi-Cola on August 28, 1898, and then as Pepsi in 1961.',
+            'http://pepsi.com/',
+            'Purchase, New York‎, US',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Loreal',
+            'L\'Oréal S.A. is a French personal care company headquartered in Clichy, Hauts-de-Seine with a registered office in Paris. It is the world\'s largest cosmetics company and has developed activities in the field concentrating on hair colour, skin care, sun protection, make-up, perfume, and hair care.',
+            'http://www.loreal.com/',
+            'Clichy, France',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Ikea',
+            'IKEA is a Swedish-founded multinational group that designs and sells ready-to-assemble furniture, kitchen appliances and home accessories. It has been the world\'s largest furniture retailer since at least 2008. It was founded in Sweden in 1943 by then-17-year-old Ingvar Kamprad, who was listed by Forbes in 2015 as one of the ten richest people in the world, worth more than $40 billion.',
+            'http://www.ikea.com/',
+            'Leiden, Netherlands',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Ford',
+            'Ford Motor Company is an American multinational automaker headquartered in Dearborn, Michigan, a suburb of Detroit. It was founded by Henry Ford and incorporated on June 16, 1903. The company sells automobiles and commercial vehicles under the Ford brand and most luxury cars under the Lincoln brand.',
+            'http://ford.com/',
+            'Dearborn, Michigan, U.S.',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Zara',
+            'Zara SA is a Spanish fast fashion retailer based in Arteixo in Galicia. The company was founded in 1975 by Amancio Ortega and Rosalía Mera. It is the main brand of the Inditex group, the world\'s largest apparel retailer. The fashion group also owns brands such as Massimo Dutti, Pull&Bear, Bershka, Stradivarius, Oysho, Zara Home, and Uterqüe. Zara as of 2017 manages up to 20 clothing collections a year.',
+            'http://zara.com/',
+            'Arteixo (A Coruña), Spain',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'H&M',
+            'Hennes & Mauritz AB is a Swedish multinational clothing-retail company known for its fast-fashion clothing for men, women, teenagers and children. H&M and its associated companies operate in 62 countries with over 4,500 stores and as of 2015 employed around 132,000 people. It is the second-largest global clothing retailer, just behind Spain-based Inditex.The company has a significant on-line presence, with on-line shopping available in 33 countries.',
+            'http://hm.com/',
+            'Stockholm, Sweden',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Netflix',
+            'Netflix, Inc. is an American over-the-top media services provider, headquartered in Los Gatos, California. Founded in 1997 by Reed Hastings and Marc Randolph in Scotts Valley, California, the company\'s primary business is its subscription-based streaming service, which offers online streaming of a library of films and television programs including those produced in-house',
+            'http://netflix.com/',
+            'Los Gatos, California',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Porsche',
+            'Dr.-Ing. h.c. F. Porsche AG, usually shortened to Porsche AG, is a German automobile manufacturer specializing in high-performance sports cars, SUVs and sedans. Porsche AG is headquartered in Stuttgart, and is owned by Volkswagen AG, which is itself majority-owned by Porsche Automobil Holding SE.',
+            'http://www.porsche.com/',
+            'Stuttgart, Baden-Württemberg, Germany',
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Danone',
+            '"Danone is a French multinational food-products corporation based in Paris and founded in Barcelona, Spain. The company is listed on Euronext Paris where it is a component of the CAC 40 stock market index. As of 2018, Danone sold products in 120 markets, and had sales in 2017 of €24.7 billion. In 2018, 29% of sales came from specialized nutrition, 19% came from waters, and 52% came from essential dairy and plant-based products."',
+            'https://www.danone.com/',
+            "Boulevard Haussmann 9th arrondissement, Paris, France",
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Adidas',
+            'Adidas AG is a multinational corporation, founded and headquartered in Herzogenaurach, Germany, that designs and manufactures shoes, clothing and accessories. It is the largest sportswear manufacturer in Europe, and the second largest in the world, after Nike. It is the holding company for the Adidas Group, which consists of the Reebok sportswear company, TaylorMade golf company (including Ashworth), Runtastic, an Austrian fitness technology company, and 8.33% of Bayern Munich, the football club.',
+            'http://www.adidas-group.com/',
+            "Herzogenaurach, Germany,",
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Fedex',
+            'FedEx Corporation is an American multinational courier delivery services company headquartered in Memphis, Tennessee. The name "FedEx" is a syllabic abbreviation of the name of the company\'s original air division, Federal Express (now FedEx Express), which was used from 1973 until 2000. The company is known for its overnight shipping service and pioneering a system that could track packages and provide real-time updates on package location (to help in finding lost packages), a feature that has now been implemented by most other carrier services.',
+            'http://fedex.com/',
+            "Memphis, Tennessee",
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Heineken',
+            'Heineken Lager Beer, or simply Heineken is a pale lager beer with 5% alcohol by volume produced by the Dutch brewing company Heineken International. Heineken is well known for its signature green bottle and red star.',
+            'http://www.heineken.com/',
+            "Netherlands",
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Dell',
+            'Dell is an American multinational computer technology company based in Round Rock, Texas, United States, that develops, sells, repairs, and supports computers and related products and services. Named after its founder, Michael Dell, the company is one of the largest technological corporations in the world, employing more than 103,300 people in America and around the world.',
+            'https://www.dell.com/',
+            "Round Rock, Texas, United States",
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'KFC',
+            'KFC, also known as Kentucky Fried Chicken is an American fast food restaurant chain that specializes in fried chicken. Headquartered in Louisville, Kentucky, it is the world\'s second-largest restaurant chain (as measured by sales) after McDonald\'s, with almost 20,000 locations globally in 123 countries and territories as of December 2015. The chain is a subsidiary of Yum! Brands, a restaurant company that also owns the Pizza Hut, Taco Bell, and WingStreet chains.',
+            'https://www.kfc.com/',
+            "Louisville, Kentucky",
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Lego',
+            'Lego is a line of plastic construction toys that are manufactured by The Lego Group, a privately held company based in Billund, Denmark. The company\'s flagship product, Lego, consists of colourful interlocking plastic bricks accompanying an array of gears, figurines called minifigures, and various other parts. Lego pieces can be assembled and connected in many ways to construct objects including vehicles, buildings, and working robots. Anything constructed can then be taken apart again, and the pieces used to make other objects.',
+            'http://www.lego.com/',
+            "Billund, Denmark",
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Lancome',
+            'Lancôme is a French luxury perfumes and cosmetics house that distributes products internationally. Lancôme is part of the L\'Oréal Luxury Products division, which is its parent company and offers skin care, fragrances, and makeup.',
+            'http://www.lancome.com/',
+            "Paris, France",
+            '',
+            ''
+        );
+
+        $this->createSeller(
+            'Costco',
+            'Costco Wholesale Corporation, trading as Costco, is an American multinational corporation which operates a chain of membership-only warehouse clubs. As of 2015, Costco was the second largest retailer in the world after Walmart, and as of 2016, Costco was the world\'s largest retailer of choice and prime beef, organic foods, rotisserie chicken, and wine.',
+            'http://www.costco.com/',
+            "Issaquah, Washington, United States",
+            '',
+            ''
+        );
+
     }
 
-    public function createSeller(string $name, string $image_cover, string $image_profile)
+    public function createSeller(string $name, string $description, string $website_link, string $address, string $image_cover, string $image_profile)
     {
         $seller = \App\Models\Seller::firstOrCreate([
             'name' => $name,
             'image_cover' => $image_cover,
             'image_profile' => $image_profile,
-            'description' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            'website_link' => "cute.land",
+            'description' => $description,
+            'website_link' => $website_link,
             'phone' => 'O64242424242',
-            'email' => 'contact@'.$name.'.com',
-            'address' => '165 avenue de Bretagne 59000 Lille',
+            'email' => 'contact@' . $name . '.com',
+            'address' => $address,
             'verified_rating_total' => 0,
             'verified_rating_count' => 0,
             'unverified_rating_total' => 0,
@@ -37,7 +247,7 @@ class SellerTableSeeder extends Seeder
         ]);
 
         \App\Models\User::firstOrCreate([
-            'email' => 'admin-'.$name.'@origami-review.com',
+            'email' => 'admin-' . $name . '@origami-review.com',
             'password' => \Illuminate\Support\Facades\Hash::make('testdev'),
             'organization_id' => $seller->id,
             'organization_type' => 'App\Models\Seller'
