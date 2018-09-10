@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Customer;
+use App\Models\Order;
+use App\Models\Review;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class SellerTableSeeder extends Seeder
@@ -256,12 +260,47 @@ class SellerTableSeeder extends Seeder
             'unverified_rating_count' => 0,
         ]);
 
+        $this->associateReviews("Fast shipping, i'm happy to order on this site.", $seller->id);
+        $this->associateReviews("Excellent delivery especially during the Christmas period. No probs!!", $seller->id);
+        $this->associateReviews("Very good customer service. I bought a laptop for my job and recommend to you this site.", $seller->id);
+        $this->associateReviews("The Best! This site is simply one of the best online stores. I have pure trust on them. The deadlines are always correct.", $seller->id);
+        $this->associateReviews("Great website, I very happy to bye a lot of things!!!", $seller->id);
+        $this->associateReviews("This is the Best and big shopping site overall world.", $seller->id);
+        $this->associateReviews("Buying with this site since years. They take responsibility for the goods they ship. If something goes wrong, they act right away. Great variety of good offered. I'm a very happy customer.", $seller->id);
+
         \App\Models\User::firstOrCreate([
             'email' => 'admin-' . $name . '@origami-review.com',
             'password' => \Illuminate\Support\Facades\Hash::make($password ? $password : uniqid()),
             'organization_id' => $seller->id,
             'organization_type' => 'App\Models\Seller'
         ]);
+    }
 
+    public function associateReviews(string $comment, $sellerId)
+    {
+        $marketplace = \App\Models\Marketplace::inRandomOrder()->first();
+        $order = Order::create([
+            'reference' => uniqid(),
+            'date' => Carbon::now(),
+            'marketplace_id' => $marketplace->id,
+            'seller_id' => $sellerId,
+            'customer_id' => Customer::all()->first()->id
+        ]);
+
+        $review = Review::create([
+            'order_id' => $order->id,
+            'text' => $comment,
+            'criteria' => [
+                [
+                    'marketplace_criteria_id' => $marketplace->marketplace_criteria[0]->id,
+                    'rating' => rand(3, 5)
+                ],
+                [
+                    'marketplace_criteria_id' => $marketplace->marketplace_criteria[1]->id,
+                    'rating' => rand(3, 5)
+                ]
+            ]
+        ]);
+        $review->accept();
     }
 }

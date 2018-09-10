@@ -134,10 +134,13 @@ class Review extends BaseModel
      */
     public static function create(array $attributes = [])
     {
+        \Log::info(print_r($attributes, true));
         $attributes['rating'] = 0;
         $attributes['review_state_id'] = ReviewState::getCreatedReviewState()->id;
+        $criteria = $attributes['criteria'];
+        unset($attributes['criteria']);
         $review = parent::create($attributes);
-        $review->saveCriteria($attributes['criteria']);
+        $review->saveCriteria($criteria);
         $review->save();
 
         //todo: send email to seller

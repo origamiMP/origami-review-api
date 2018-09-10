@@ -18,13 +18,14 @@ class SellerTransformer extends BaseTransformer
      */
     public function transform(Seller $seller)
     {
-        $reviewCount = $seller->reviews->whereIn('review_state_id', [2, 4])->count();
+        $reviews = $seller->reviews->whereIn('review_state_id', [2, 4]);
+        $reviewCount = $reviews->count();
 
-        $fiveRatingRatio = $reviewCount == 0 ? 0 : $seller->reviews->where('rating', 5)->count();
-        $fourRatingRatio = $reviewCount == 0 ? 0 : $seller->reviews->where('rating', 4)->count();
-        $threeRatingRatio = $reviewCount == 0 ? 0 : $seller->reviews->where('rating', 3)->count();
-        $twoRatingRatio = $reviewCount == 0 ? 0 : $seller->reviews->where('rating', 2)->count();
-        $oneRatingRatio = $reviewCount == 0 ? 0 : $seller->reviews->where('rating', 1)->count();
+        $fiveRatingRatio = $reviewCount == 0 ? 0 : round($reviews->where('rating', 5)->count() / $reviewCount * 100);
+        $fourRatingRatio = $reviewCount == 0 ? 0 : round($reviews->where('rating', 4)->count() / $reviewCount * 100);
+        $threeRatingRatio = $reviewCount == 0 ? 0 : round($reviews->where('rating', 3)->count() / $reviewCount * 100);
+        $twoRatingRatio = $reviewCount == 0 ? 0 : round($reviews->where('rating', 2)->count() / $reviewCount * 100);
+        $oneRatingRatio = $reviewCount == 0 ? 0 : round($reviews->where('rating', 1)->count() / $reviewCount * 100);
 
         return parent::meta([
             'id' => $seller->id,
