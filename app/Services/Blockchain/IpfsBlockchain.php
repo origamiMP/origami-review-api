@@ -48,6 +48,7 @@ class IpfsBlockchain extends BlockchainContract
             $review->ddb_node_id = $hash;
             $review->ddb_supplier = 'ipfs';
             $review->review_state_id = ReviewState::getCertifiedReviewState()->id;
+            $review->incrementGlobalSellerAndMarketplaceRating();
 
             $review->save();
 

@@ -11,9 +11,13 @@ class MarketplaceController extends Controller
     protected $type = 'marketplaces';
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->collection(Marketplace::all(), new MarketplaceTransformer());
+        $marketplaces = Marketplace::all();
+        if ($request->get('search'))
+            $marketplaces = Marketplace::where('name', 'like', '%'.$request->get('search').'%')->get();
+
+        return $this->collection($marketplaces, new MarketplaceTransformer());
     }
 
     public function show($id)

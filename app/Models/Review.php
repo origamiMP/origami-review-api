@@ -139,7 +139,6 @@ class Review extends BaseModel
         $review = parent::create($attributes);
         $review->saveCriteria($attributes['criteria']);
         $review->save();
-        $review->incrementGlobalSellerRating();
 
         //todo: send email to seller
         //todo: send email to marketplace
@@ -174,16 +173,21 @@ class Review extends BaseModel
     /**
      * Increment global seller rating when new review
      */
-    public function incrementGlobalSellerRating()
+    public function incrementGlobalSellerAndMarketplaceRating()
     {
         if ($this->wallet) {
             $this->order->seller->verified_rating_count++;
             $this->order->seller->verified_rating_total += $this->rating;
+            $this->order->marketplace->verified_rating_count++;
+            $this->order->marketplace->verified_rating_total += $this->rating;
         } else {
-            $this->order->seller->unverified_rating_count++;
-            $this->order->seller->unverified_rating_total += $this->rating;
+            $this->order->seller->verified_rating_count++;
+            $this->order->seller->verified_rating_total += $this->rating;
+            $this->order->marketplace->unverified_rating_count++;
+            $this->order->marketplace->unverified_rating_total += $this->rating;
         }
         $this->order->seller->save();
+        $this->order->marketplace->save();
     }
 
 
@@ -247,7 +251,8 @@ class Review extends BaseModel
             $this->certify();
             //todo: send email to customer
             //todo: send reward to customer
-        }
+        } else
+            $this->incrementGlobalSellerAndMarketplaceRating();
     }
 
     public function addComment(string $text, string $ip)

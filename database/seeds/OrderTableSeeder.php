@@ -16,13 +16,13 @@ class OrderTableSeeder extends Seeder
             'email' => 'johndoe@gmail.com'
         ]);
 
-        $seller = \App\Models\Seller::whereName('Cuteland')->first();
-
-        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
-        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
-        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
-        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
-        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
+//        $seller = \App\Models\Seller::whereName('Cuteland')->first();
+//
+//        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
+//        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
+//        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
+//        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
+//        $this->createOrder($customer, $seller, \App\Models\Marketplace::inRandomOrder()->first());
     }
 
     public function createOrder(\App\Models\Customer $customer, \App\Models\Seller $seller, \App\Models\Marketplace $marketplace)

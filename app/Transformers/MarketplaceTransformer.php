@@ -7,7 +7,7 @@ use App\Models\Marketplace;
 class MarketplaceTransformer extends BaseTransformer
 {
     protected $availableIncludes = [
-        'users', 'review_comments', 'orders', 'marketplace_criteria'
+        'reviews', 'users', 'review_comments', 'orders', 'marketplace_criteria'
     ];
 
     /**
@@ -18,10 +18,40 @@ class MarketplaceTransformer extends BaseTransformer
      */
     public function transform(Marketplace $marketplace)
     {
+        $reviewCount = $marketplace->reviews->whereIn('review_state_id', [2, 4])->count();
+
+        $fiveRatingRatio = $reviewCount == 0 ? 0 : $marketplace->reviews->where('rating', 5)->count();
+        $fourRatingRatio = $reviewCount == 0 ? 0 : $marketplace->reviews->where('rating', 4)->count();
+        $threeRatingRatio = $reviewCount == 0 ? 0 : $marketplace->reviews->where('rating', 3)->count();
+        $twoRatingRatio = $reviewCount == 0 ? 0 : $marketplace->reviews->where('rating', 2)->count();
+        $oneRatingRatio = $reviewCount == 0 ? 0 : $marketplace->reviews->where('rating', 1)->count();
+
         return parent::meta([
             'id' => $marketplace->id,
             'type' => "marketplace",
+
             'name' => $marketplace->name,
+            'verified_rating_count' => $marketplace->verified_rating_count,
+            'verified_rating_total' => $marketplace->verified_rating_total,
+            'unverified_rating_count' => $marketplace->unverified_rating_count,
+            'unverified_rating_total' => $marketplace->unverified_rating_total,
+            'average_verified_rating' => $marketplace->verified_rating_count == 0 ? 0 : round($marketplace->verified_rating_total / $marketplace->verified_rating_count),
+            'average_rating' => $marketplace->unverified_rating_count + $marketplace->verified_rating_count == 0 ? 0 : round(($marketplace->verified_rating_total + $marketplace->unverified_rating_total) / ($marketplace->unverified_rating_count + $marketplace->verified_rating_count)),
+
+            'image_cover' => $marketplace->image_cover,
+            'image_profile' => $marketplace->image_profile,
+            'description' => $marketplace->description,
+            'website_link' => $marketplace->website_link,
+            'email' => $marketplace->email,
+            'phone' => $marketplace->phone,
+            'address' => $marketplace->address,
+
+            'five_rating_reviews_ratio' => $fiveRatingRatio,
+            'four_rating_reviews_ratio' => $fourRatingRatio,
+            'three_rating_reviews_ratio' => $threeRatingRatio,
+            'two_rating_reviews_ratio' => $twoRatingRatio,
+            'one_rating_reviews_ratio' => $oneRatingRatio,
+
             'wallet' => $marketplace->wallet,
             'default_review_delay' => $marketplace->default_review_delay,
             'created_at' => $marketplace->created_at,
@@ -48,5 +78,11 @@ class MarketplaceTransformer extends BaseTransformer
     {
         return $this->collection($marketplace->marketplace_criteria, new MarketplaceCriteriaTransformer(), 'marketplace_criteria');
     }
+
+    public function includeReviews(Marketplace $marketplace)
+    {
+        return $this->collection($marketplace->reviews->whereIn('review_state_id', [2, 4]), new ReviewTransformer(), 'reviews');
+    }
+
 
 }

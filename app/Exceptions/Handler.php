@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
         if ($e instanceof OrigamiException)
             return $this->getErrorResponseFromOrigamiException($e);
 
-        $origamiException = (new OrigamiException())->addError($e->getMessage(), $e->getStatusCode());
+        $origamiException = (new OrigamiException())->addError($e->getMessage(), 422);
         return $this->render($request, $origamiException);
     }
 

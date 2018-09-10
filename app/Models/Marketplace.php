@@ -11,6 +11,17 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @property int $id
  * @property string $name
+ * @property string $image_cover
+ * @property string $image_profile
+ * @property string $description
+ * @property string $website_link
+ * @property string $email
+ * @property string $phone
+ * @property string $address
+ * @property int $verified_rating_total
+ * @property int $verified_rating_count
+ * @property int $unverified_rating_total
+ * @property int $unverified_rating_count
  * @property string $wallet
  * @property int $default_review_delay
  * @property \Carbon\Carbon|null $created_at
@@ -37,6 +48,10 @@ class Marketplace extends BaseModel
     protected $rules = [
         'id' => 'string|unique:marketplaces,id,{id}',
         'name' => 'required|string',
+        'verified_rating_total' => 'integer|min:0',
+        'verified_rating_count' => 'integer|min:0',
+        'unverified_rating_total' => 'integer|min:0',
+        'unverified_rating_count' => 'integer|min:0',
         'wallet' => 'nullable|string|unique:marketplaces,wallet,{wallet}',
         'default_review_delay' => 'integer|min:0'
     ];

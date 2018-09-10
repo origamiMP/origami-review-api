@@ -28,7 +28,7 @@ class ReviewTransformer extends BaseTransformer
             'blockchain_block_id' => $review->blockchain_block_id,
             'blockchain_tx_id' => $review->blockchain_tx_id,
             'blockchain_supplier' => $review->blockchain_supplier,
-            'created_at' => $review->created_at,
+            'created_at' => $review->created_at->toDateTimeString(),
             'updated_at' => $review->updated_at
         ]);
     }

@@ -18,7 +18,7 @@ class SellerTransformer extends BaseTransformer
      */
     public function transform(Seller $seller)
     {
-        $reviewCount = $seller->reviews->count();
+        $reviewCount = $seller->reviews->whereIn('review_state_id', [2, 4])->count();
 
         $fiveRatingRatio = $reviewCount == 0 ? 0 : $seller->reviews->where('rating', 5)->count();
         $fourRatingRatio = $reviewCount == 0 ? 0 : $seller->reviews->where('rating', 4)->count();
@@ -73,6 +73,6 @@ class SellerTransformer extends BaseTransformer
 
     public function includeReviews(Seller $seller)
     {
-        return $this->collection($seller->reviews, new ReviewTransformer(), 'reviews');
+        return $this->collection($seller->reviews->whereIn('review_state_id', [2, 4]), new ReviewTransformer(), 'reviews');
     }
 }
